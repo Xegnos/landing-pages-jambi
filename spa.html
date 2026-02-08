@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serenity Spa Jambi | Destinasi Wellness Mewah</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #C9A962;
+            --gold-light: #E8D5A3;
+            --forest: #1A3329;
+            --forest-deep: #0D1F17;
+            --cream: #F7F4EE;
+            --cream-dark: #EBE6DC;
+            --sage: #8FAE8B;
+            --terracotta: #C17B5F;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--cream);
+            color: var(--forest-deep);
+            overflow-x: hidden;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease, background 0.15s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor.hover {
+            transform: scale(2);
+            background: var(--gold);
+        }
+
+        /* Noise Texture Overlay */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(247, 244, 238, 0.95), transparent);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(247, 244, 238, 0.98);
+            box-shadow: 0 2px 40px rgba(26, 51, 41, 0.08);
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            color: var(--forest);
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--forest);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 0.8rem 2rem;
+            background: var(--forest);
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--gold);
+            color: var(--forest-deep);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            padding: 12rem 6rem 6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-tagline {
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.3s forwards;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.5s forwards;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--forest);
+            max-width: 420px;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.7s forwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.9s forwards;
+        }
+
+        .btn-primary {
+            padding: 1.2rem 3rem;
+            background: var(--forest);
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.3s ease;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn-primary:hover {
+            color: var(--forest-deep);
+        }
+
+        .btn-primary:hover::before {
+            left: 0;
+        }
+
+        .btn-secondary {
+            padding: 1.2rem 3rem;
+            background: transparent;
+            border: 1px solid var(--forest);
+            color: var(--forest);
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--forest);
+            color: var(--cream);
+        }
+
+        .hero-visual {
+            position: relative;
+            background: var(--forest);
+            overflow: hidden;
+        }
+
+        .hero-image-placeholder {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--forest) 0%, var(--forest-deep) 50%, var(--sage) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 20% 30%, var(--gold) 1px, transparent 1px),
+                radial-gradient(circle at 80% 70%, var(--gold) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: patternFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes patternFloat {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-10px, 10px); }
+        }
+
+        .hero-decorative {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 15rem;
+            font-weight: 300;
+            color: var(--gold);
+            opacity: 0.15;
+            position: absolute;
+            bottom: -3rem;
+            right: -2rem;
+            line-height: 1;
+        }
+
+        .floating-leaf {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 1px solid var(--gold);
+            border-radius: 50% 0 50% 0;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-leaf:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+        .floating-leaf:nth-child(2) { top: 60%; left: 60%; animation-delay: 2s; width: 60px; height: 60px; }
+        .floating-leaf:nth-child(3) { top: 40%; left: 80%; animation-delay: 4s; width: 80px; height: 80px; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 6rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 1.2s forwards;
+        }
+
+        .scroll-line {
+            width: 40px;
+            height: 1px;
+            background: var(--forest);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .scroll-text {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 10rem 6rem;
+            background: var(--cream);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+
+        .section-tag {
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            color: var(--forest);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            border: 1px solid transparent;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(26, 51, 41, 0.1);
+            border-color: var(--cream-dark);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--forest) 0%, var(--sage) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--gold-light);
+            font-style: italic;
+        }
+
+        .service-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--forest);
+            margin-bottom: 1rem;
+        }
+
+        .service-desc {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+
+        .service-price span {
+            font-size: 0.9rem;
+            color: #999;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Experience Section */
+        .experience {
+            padding: 10rem 0;
+            background: var(--forest);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(201, 169, 98, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(143, 174, 139, 0.1) 0%, transparent 50%);
+        }
+
+        .experience-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            padding: 0 6rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .experience-image-placeholder {
+            aspect-ratio: 4/5;
+            background: linear-gradient(180deg, var(--sage) 0%, var(--forest-deep) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-image-placeholder::before {
+            content: '';
+            position: absolute;
+            inset: 20px;
+            border: 1px solid var(--gold);
+            opacity: 0.3;
+        }
+
+        .experience-image-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-style: italic;
+            text-align: center;
+            opacity: 0.5;
+        }
+
+        .experience-text .section-tag {
+            color: var(--gold);
+        }
+
+        .experience-text .section-title {
+            color: var(--cream);
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .experience-text p {
+            color: var(--cream);
+            opacity: 0.8;
+            line-height: 1.9;
+            margin-bottom: 2rem;
+        }
+
+        .features-list {
+            list-style: none;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .features-list li {
+            color: var(--cream);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .features-list li::before {
+            content: '◇';
+            color: var(--gold);
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 6rem;
+            background: var(--gold);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--forest-deep);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--forest);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 10rem 6rem;
+            background: var(--cream);
+            text-align: center;
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-style: italic;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--forest);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            font-size: 8rem;
+            color: var(--gold);
+            opacity: 0.3;
+            position: absolute;
+            top: -3rem;
+            left: -2rem;
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1;
+        }
+
+        .testimonial-author {
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .testimonial-role {
+            font-size: 0.85rem;
+            color: #999;
+            margin-top: 0.3rem;
+        }
+
+        /* Location Section */
+        .location {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 80vh;
+        }
+
+        .location-map {
+            background: linear-gradient(135deg, var(--cream-dark) 0%, var(--sage) 50%, var(--forest) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .map-placeholder {
+            text-align: center;
+            color: var(--forest-deep);
+        }
+
+        .map-placeholder-icon {
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--forest);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .map-placeholder-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+        }
+
+        .location-info {
+            background: var(--forest-deep);
+            padding: 6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .location-info .section-tag {
+            color: var(--gold);
+        }
+
+        .location-info .section-title {
+            color: var(--cream);
+            text-align: left;
+            margin-bottom: 3rem;
+        }
+
+        .contact-details {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--forest-deep);
+            flex-shrink: 0;
+        }
+
+        .contact-text h4 {
+            color: var(--cream);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-text p {
+            color: var(--cream);
+            opacity: 0.7;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 10rem 6rem;
+            background: var(--cream);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, var(--gold));
+        }
+
+        .cta-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            color: var(--forest);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-title em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .cta-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 3rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--forest-deep);
+            padding: 5rem 6rem 2rem;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid rgba(201, 169, 98, 0.2);
+        }
+
+        .footer-brand .logo {
+            color: var(--cream);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .footer-brand p {
+            color: var(--cream);
+            opacity: 0.6;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 300px;
+        }
+
+        .footer-links h4 {
+            color: var(--gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--cream);
+            opacity: 0.6;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            color: var(--cream);
+            opacity: 0.4;
+            font-size: 0.85rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--forest-deep);
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .hero-content {
+                padding: 10rem 3rem 6rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-content {
+                grid-template-columns: 1fr;
+                padding: 0 3rem;
+            }
+
+            .experience-image-placeholder {
+                display: none;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 4rem 3rem;
+            }
+
+            .location {
+                grid-template-columns: 1fr;
+            }
+
+            .location-map {
+                min-height: 300px;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            nav {
+                padding: 1rem 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .services, .testimonials, .cta {
+                padding: 6rem 3rem;
+            }
+
+            footer {
+                padding: 4rem 3rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="noise"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">SERENITY<span>.</span></div>
+        <ul class="nav-links">
+            <li><a href="#services">Layanan</a></li>
+            <li><a href="#experience">Pengalaman</a></li>
+            <li><a href="#testimonials">Testimoni</a></li>
+            <li><a href="#location">Lokasi</a></li>
+        </ul>
+        <a href="#book" class="nav-cta">Reservasi</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-tagline">Destinasi Wellness Mewah di Jambi</span>
+            <h1 class="hero-title">Temukan<br><em>Ketenangan Jiwa</em></h1>
+            <p class="hero-desc">Lepaskan penat dan nikmati ketenangan di sanctuary spa kami. Di mana tradisi penyembuhan kuno Sumatera bertemu dengan kemewahan wellness modern.</p>
+            <div class="hero-buttons">
+                <a href="#book" class="btn-primary">Reservasi Sekarang</a>
+                <a href="#services" class="btn-secondary">Lihat Layanan</a>
+            </div>
+            <div class="scroll-indicator">
+                <div class="scroll-line"></div>
+                <span class="scroll-text">Scroll untuk Lanjut</span>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-image-placeholder">
+                <div class="hero-pattern"></div>
+                <div class="floating-leaf"></div>
+                <div class="floating-leaf"></div>
+                <div class="floating-leaf"></div>
+                <div class="hero-decorative">禅</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header reveal">
+            <span class="section-tag">Perawatan Signature Kami</span>
+            <h2 class="section-title">Dirancang untuk Kesejahteraan Anda</h2>
+        </div>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-icon">B</div>
+                <h3 class="service-title">Terapi Batu Vulkanik Sumatera</h3>
+                <p class="service-desc">Batu vulkanik panas dari Gunung Kerinci dikombinasikan dengan teknik pijat tradisional untuk melepaskan ketegangan dan mengembalikan keseimbangan tubuh.</p>
+                <div class="service-price">Rp 850.000 <span>/ 90 menit</span></div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">A</div>
+                <h3 class="service-title">Perjalanan Aromaterapi</h3>
+                <p class="service-desc">Pengalaman sensori menggunakan minyak esensial lokal termasuk melati dan nilam khas Jambi untuk relaksasi mendalam.</p>
+                <div class="service-price">Rp 650.000 <span>/ 75 menit</span></div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">L</div>
+                <h3 class="service-title">Lulur Tradisional Keraton</h3>
+                <p class="service-desc">Ritual kecantikan kuno dari keraton Jawa dengan lulur kunyit, mandi bunga, dan pijat minyak kelapa yang menyehatkan.</p>
+                <div class="service-price">Rp 1.200.000 <span>/ 120 menit</span></div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">W</div>
+                <h3 class="service-title">Facial Hutan Hujan</h3>
+                <p class="service-desc">Bahan-bahan organik dari hutan hujan Sumatera membersihkan, melembabkan, dan meremajakan kulit dengan kebaikan alam terbaik.</p>
+                <div class="service-price">Rp 550.000 <span>/ 60 menit</span></div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">P</div>
+                <h3 class="service-title">Paket Romantis Berdua</h3>
+                <p class="service-desc">Nikmati pengalaman membahagiakan di suite privat kami dengan pijat sinkron, champagne, dan buah-buahan celup cokelat.</p>
+                <div class="service-price">Rp 2.500.000 <span>/ 150 menit</span></div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">Y</div>
+                <h3 class="service-title">Yoga & Meditasi</h3>
+                <p class="service-desc">Awali perjalanan wellness Anda dengan sesi terbimbing di paviliun taman kami yang tenang dengan pemandangan hijau tropis.</p>
+                <div class="service-price">Rp 300.000 <span>/ 60 menit</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <div class="experience-content">
+            <div class="experience-image-placeholder">
+                <span class="experience-image-text">Ketenangan<br>Menanti</span>
+            </div>
+            <div class="experience-text reveal">
+                <span class="section-tag">Pengalaman Serenity</span>
+                <h2 class="section-title">Sanctuary yang Berakar pada Tradisi</h2>
+                <p>Terletak di jantung Kota Jambi, Serenity Spa mengambil inspirasi dari hutan hujan Sumatera yang rimbun dan praktik penyembuhan berusia berabad-abad yang diwariskan turun-temurun.</p>
+                <p>Terapis ahli kami memadukan teknik tradisional dengan kemewahan kontemporer, menciptakan perawatan personal yang merawat tubuh, pikiran, dan jiwa.</p>
+                <ul class="features-list">
+                    <li>Suite perawatan privat dengan pemandangan taman</li>
+                    <li>Bahan-bahan organik dari sumber lokal</li>
+                    <li>Terapis bersertifikat dan berpengalaman</li>
+                    <li>Upacara teh herbal gratis</li>
+                    <li>Ruang relaksasi pasca perawatan</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stat-item reveal">
+            <div class="stat-number">8+</div>
+            <div class="stat-label">Tahun Pengalaman</div>
+        </div>
+        <div class="stat-item reveal">
+            <div class="stat-number">15RB</div>
+            <div class="stat-label">Tamu Puas</div>
+        </div>
+        <div class="stat-item reveal">
+            <div class="stat-number">25</div>
+            <div class="stat-label">Jenis Perawatan</div>
+        </div>
+        <div class="stat-item reveal">
+            <div class="stat-number">4.9</div>
+            <div class="stat-label">Rating Rata-rata</div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-header reveal">
+            <span class="section-tag">Kata Mereka</span>
+            <h2 class="section-title">Testimoni Tamu Kami</h2>
+        </div>
+        <div class="testimonial-slider reveal">
+            <p class="testimonial-quote">Perawatan Lulur di sini benar-benar luar biasa. Dari saat saya masuk, saya merasa seperti dibawa ke dunia lain. Perhatian terhadap detail dan ketulusan dari staf membuat pengalaman ini tak terlupakan.</p>
+            <p class="testimonial-author">Anindya Putri</p>
+            <p class="testimonial-role">Jakarta, Indonesia</p>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location" id="location">
+        <div class="location-map">
+            <div class="map-placeholder">
+                <div class="map-placeholder-icon">📍</div>
+                <p class="map-placeholder-text">Peta Interaktif<br>Segera Hadir</p>
+            </div>
+        </div>
+        <div class="location-info">
+            <span class="section-tag">Temukan Kami</span>
+            <h2 class="section-title">Kunjungi Sanctuary Kami</h2>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <div class="contact-icon">A</div>
+                    <div class="contact-text">
+                        <h4>Alamat</h4>
+                        <p>Jl. Sultan Thaha No. 88<br>Pasar Jambi, Kota Jambi<br>Jambi 36123, Indonesia</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">J</div>
+                    <div class="contact-text">
+                        <h4>Jam Operasional</h4>
+                        <p>Setiap Hari: 09.00 - 21.00 WIB<br>Booking terakhir pukul 19.30</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">R</div>
+                    <div class="contact-text">
+                        <h4>Reservasi</h4>
+                        <p>+62 741 123 4567<br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="137b767f7f7c53607661767d7a676a6063723e79727e717a3d707c7e">[email&#160;protected]</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="book">
+        <div class="reveal">
+            <h2 class="cta-title">Mulai Perjalanan Menuju <em>Ketenangan</em></h2>
+            <p class="cta-subtitle">Reservasi sekarang dan dapatkan upgrade aromaterapi gratis untuk kunjungan pertama Anda.</p>
+            <a href="https://wa.me/627411234567" class="btn-primary">Reservasi via WhatsApp</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <span class="logo">SERENITY<span>.</span></span>
+                <p>Destinasi wellness mewah di jantung Kota Jambi, di mana tradisi penyembuhan kuno bertemu dengan kenyamanan modern.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Menu Cepat</h4>
+                <ul>
+                    <li><a href="#services">Layanan Kami</a></li>
+                    <li><a href="#experience">Pengalaman</a></li>
+                    <li><a href="#testimonials">Testimoni</a></li>
+                    <li><a href="#book">Reservasi</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Perawatan</h4>
+                <ul>
+                    <li><a href="#">Terapi Pijat</a></li>
+                    <li><a href="#">Perawatan Tubuh</a></li>
+                    <li><a href="#">Perawatan Wajah</a></li>
+                    <li><a href="#">Paket Lengkap</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Hubungi Kami</h4>
+                <ul>
+                    <li><a href="tel:+627411234567">+62 741 123 4567</a></li>
+                    <li><a href="/cdn-cgi/l/email-protection#0d65686161624d7e687f68636479747e7d6c20676c606f64236e6260">Email Kami</a></li>
+                    <li><a href="#">Voucher Hadiah</a></li>
+                    <li><a href="#">Karir</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Serenity Spa Jambi. Hak Cipta Dilindungi.</p>
+            <div class="social-links">
+                <a href="#">IG</a>
+                <a href="#">FB</a>
+                <a href="#">WA</a>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.1;
+            cursorY += (mouseY - cursorY) * 0.1;
+            cursor.style.left = cursorX - 10 + 'px';
+            cursor.style.top = cursorY - 10 + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Cursor hover effect
+        document.querySelectorAll('a, button, .service-card').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // Navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Reveal on scroll
+        const reveals = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const revealTop = el.getBoundingClientRect().top;
+                const revealPoint = 150;
+
+                if (revealTop < windowHeight - revealPoint) {
+                    el.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.p

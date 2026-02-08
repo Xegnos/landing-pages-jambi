@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Pages Collection | Jambi Business Templates</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --bg-card: #141414;
+            --bg-card-hover: #1a1a1a;
+            --text: #ffffff;
+            --text-muted: #888888;
+            --accent-1: #00F0FF;
+            --accent-2: #CCFF00;
+            --accent-3: #FF6B9D;
+            --accent-4: #B8956E;
+            --accent-5: #E63946;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+            color: var(--bg);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--text) 0%, var(--accent-1) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid #222;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--card-accent, var(--accent-1));
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--card-accent, var(--accent-1));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-preview {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-preview-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.15;
+        }
+
+        .card-icon {
+            font-size: 4rem;
+            position: relative;
+            z-index: 1;
+            opacity: 0.8;
+        }
+
+        .card-content {
+            padding: 2rem;
+        }
+
+        .card-category {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--card-accent, var(--accent-1));
+            margin-bottom: 0.75rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            padding: 0.3rem 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .card-link:hover {
+            color: var(--card-accent, var(--accent-1));
+            gap: 1rem;
+        }
+
+        .card-link svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Card specific colors */
+        .card-spa { --card-accent: #8FAE8B; }
+        .card-spa .card-preview-bg { background: linear-gradient(135deg, #1A3329, #0D1F17); }
+        
+        .card-notaris { --card-accent: #B8956E; }
+        .card-notaris .card-preview-bg { background: linear-gradient(135deg, #1B2B4B, #0F1A2E); }
+        
+        .card-kbbq { --card-accent: #E63946; }
+        .card-kbbq .card-preview-bg { background: linear-gradient(135deg, #2D1A1A, #1A0A0A); }
+        
+        .card-wedding { --card-accent: #C9A0A0; }
+        .card-wedding .card-preview-bg { background: linear-gradient(135deg, #2D2428, #1A1518); }
+        
+        .card-gym { --card-accent: #00F0FF; }
+        .card-gym .card-preview-bg { background: linear-gradient(135deg, #0A1A1A, #050A0A); }
+
+        footer {
+            text-align: center;
+            margin-top: 5rem;
+            padding-top: 3rem;
+            border-top: 1px solid #222;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--accent-1);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="badge">Template Collection</div>
+            <h1>Landing Pages Jambi</h1>
+            <p class="subtitle">A collection of professionally designed landing page templates for various businesses in Jambi, Indonesia. All templates are fully responsive and ready to customize.</p>
+        </header>
+
+        <div class="grid">
+            <!-- Spa -->
+            <article class="card card-spa">
+                <div class="card-preview">
+                    <div class="card-preview-bg"></div>
+                    <div class="card-icon">&#9752;</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-category">Wellness & Beauty</div>
+                    <h2 class="card-title">Serenity Spa</h2>
+                    <p class="card-desc">Luxury spa and wellness retreat with tropical zen aesthetic. Features service cards, pricing, testimonials, and booking form.</p>
+                    <div class="card-tags">
+                        <span class="tag">Spa</span>
+                        <span class="tag">Wellness</span>
+                        <span class="tag">Indonesian</span>
+                    </div>
+                    <a href="spa.html" class="card-link">
+                        View Template
+                        <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Notaris -->
+            <article class="card card-notaris">
+                <div class="card-preview">
+                    <div class="card-preview-bg"></div>
+                    <div class="card-icon">&#9878;</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-category">Legal & Professional</div>
+                    <h2 class="card-title">Notaris & PPAT</h2>
+                    <p class="card-desc">Professional law firm and notary office with authoritative navy and brass design. Includes services, credentials, and contact form.</p>
+                    <div class="card-tags">
+                        <span class="tag">Legal</span>
+                        <span class="tag">Notary</span>
+                        <span class="tag">Professional</span>
+                    </div>
+                    <a href="notaris.html" class="card-link">
+                        View Template
+                        <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Korean BBQ -->
+            <article class="card card-kbbq">
+                <div class="card-preview">
+                    <div class="card-preview-bg"></div>
+                    <div class="card-icon">&#127830;</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-category">Food & Restaurant</div>
+                    <h2 class="card-title">GOGIYO Korean BBQ</h2>
+                    <p class="card-desc">Vibrant all-you-can-eat Korean BBQ restaurant with bold red and black design. Features menu packages, meat cuts, and oden bar.</p>
+                    <div class="card-tags">
+                        <span class="tag">Restaurant</span>
+                        <span class="tag">Korean</span>
+                        <span class="tag">AYCE</span>
+                    </div>
+                    <a href="kbbq.html" class="card-link">
+                        View Template
+                        <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Wedding -->
+            <article class="card card-wedding">
+                <div class="card-preview">
+                    <div class="card-preview-bg"></div>
+                    <div class="card-icon">&amp;</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-category">Photography & Events</div>
+                    <h2 class="card-title">Eternia Wedding Studio</h2>
+                    <p class="card-desc">Elegant wedding photography studio with romantic blush and champagne palette. Includes packages, portfolio, and booking form.</p>
+                    <div class="card-tags">
+                        <span class="tag">Wedding</span>
+                        <span class="tag">Photography</span>
+                        <span class="tag">Elegant</span>
+                    </div>
+                    <a href="wedding.html" class="card-link">
+                        View Template
+                        <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Gym -->
+            <article class="card card-gym">
+                <div class="card-preview">
+                    <div class="card-preview-bg"></div>
+                    <div class="card-icon">&#9733;</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-category">Fitness & Health</div>
+                    <h2 class="card-title">APEX Fitness</h2>
+                    <p class="card-desc">Premium gym with bold electric cyan and lime design. Features membership tiers, facilities, coaches, class schedules, and trial signup.</p>
+                    <div class="card-tags">
+                        <span class="tag">Gym</span>
+                        <span class="tag">Fitness</span>
+                        <span class="tag">Premium</span>
+                    </div>
+                    <a href="gym.html" class="card-link">
+                        View Template
+                        <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                    </a>
+                </div>
+            </article>
+        </div>
+
+        <footer>
+            <p>Created with care for businesses in Jambi, Indonesia</p>
+        </footer>
+    </div>
+</body>
+</html>

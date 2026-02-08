@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kantor Notaris & PPAT Dharma Wijaya, S.H., M.Kn. | Jambi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #1B2B4B;
+            --navy-deep: #0F1A2E;
+            --navy-light: #2A3F6B;
+            --brass: #B8956E;
+            --brass-light: #D4B896;
+            --brass-dark: #96734D;
+            --ivory: #FAF9F7;
+            --ivory-dark: #F0EDE8;
+            --charcoal: #2D2D2D;
+            --steel: #6B7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: var(--ivory);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+
+        /* Subtle Grid Pattern */
+        .grid-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.03;
+            background-image: 
+                linear-gradient(var(--navy) 1px, transparent 1px),
+                linear-gradient(90deg, var(--navy) 1px, transparent 1px);
+            background-size: 80px 80px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.2rem 5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(250, 249, 247, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid transparent;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(250, 249, 247, 0.98);
+            border-bottom: 1px solid rgba(27, 43, 75, 0.1);
+            box-shadow: 0 4px 30px rgba(27, 43, 75, 0.05);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--navy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .logo-icon::before {
+            content: '⚖';
+            font-size: 1.4rem;
+            color: var(--brass);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--navy);
+            letter-spacing: 0.02em;
+        }
+
+        .logo-title {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--brass-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--navy);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--brass);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 0.9rem 2rem;
+            background: var(--navy);
+            color: var(--ivory);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 2px solid var(--navy);
+        }
+
+        .nav-cta:hover {
+            background: transparent;
+            color: var(--navy);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            position: relative;
+        }
+
+        .hero-content {
+            padding: 10rem 5rem 5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 1.2rem;
+            background: var(--ivory-dark);
+            border-left: 3px solid var(--brass);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.3s forwards;
+        }
+
+        .hero-badge span {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--navy);
+            font-weight: 500;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 5vw, 4.2rem);
+            font-weight: 400;
+            line-height: 1.15;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.5s forwards;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--brass-dark);
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--steel);
+            max-width: 480px;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.7s forwards;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.9s forwards;
+        }
+
+        .hero-stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: var(--navy);
+            line-height: 1;
+        }
+
+        .hero-stat-label {
+            font-size: 0.8rem;
+            color: var(--steel);
+            margin-top: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 1.1s forwards;
+        }
+
+        .btn-primary {
+            padding: 1.1rem 2.5rem;
+            background: var(--navy);
+            color: var(--ivory);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--navy);
+            transition: all 0.4s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--brass);
+            border-color: var(--brass);
+            color: var(--navy-deep);
+        }
+
+        .btn-secondary {
+            padding: 1.1rem 2.5rem;
+            background: transparent;
+            border: 2px solid var(--navy);
+            color: var(--navy);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--navy);
+            color: var(--ivory);
+        }
+
+        .hero-visual {
+            position: relative;
+            background: var(--navy);
+            overflow: hidden;
+        }
+
+        .hero-visual-inner {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(160deg, var(--navy-light) 0%, var(--navy-deep) 100%);
+        }
+
+        .hero-pattern-overlay {
+            position: absolute;
+            inset: 0;
+            opacity: 0.08;
+            background-image: repeating-linear-gradient(
+                45deg,
+                var(--brass) 0,
+                var(--brass) 1px,
+                transparent 1px,
+                transparent 20px
+            );
+        }
+
+        .hero-decorative-text {
+            position: absolute;
+            bottom: 3rem;
+            right: 3rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            font-weight: 400;
+            color: var(--brass);
+            opacity: 0.1;
+            line-height: 1;
+            letter-spacing: -0.05em;
+        }
+
+        .hero-accent-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 100px;
+            height: 1px;
+            background: var(--brass);
+        }
+
+        .floating-badge {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--brass);
+            color: var(--navy-deep);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .floating-badge-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 500;
+            line-height: 1;
+        }
+
+        .floating-badge-text {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-top: 0.3rem;
+        }
+
+        /* Trust Indicators */
+        .trust-bar {
+            background: var(--navy-deep);
+            padding: 1.5rem 5rem;
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--ivory);
+            font-size: 0.85rem;
+        }
+
+        .trust-item::before {
+            content: '✓';
+            color: var(--brass);
+            font-weight: bold;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 8rem 5rem;
+            background: var(--ivory);
+            position: relative;
+        }
+
+        .section-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 5rem;
+            align-items: end;
+        }
+
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-label-line {
+            width: 40px;
+            height: 2px;
+            background: var(--brass);
+        }
+
+        .section-label-text {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--brass-dark);
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            font-weight: 400;
+            color: var(--navy);
+            line-height: 1.2;
+        }
+
+        .section-desc {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--steel);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            position: relative;
+            border: 1px solid var(--ivory-dark);
+            transition: all 0.4s ease;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--brass);
+            transition: width 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            width: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(27, 43, 75, 0.1);
+            border-color: transparent;
+        }
+
+        .service-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--ivory-dark);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .service-card:hover .service-number {
+            color: var(--brass-light);
+        }
+
+        .service-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: var(--navy);
+            margin-bottom: 1rem;
+        }
+
+        .service-desc {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--steel);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-link {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--brass-dark);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .service-link:hover {
+            gap: 1rem;
+        }
+
+        .service-link::after {
+            content: '→';
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 5rem;
+            background: var(--navy);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, rgba(184, 149, 110, 0.05) 100%);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 6rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image-placeholder {
+            aspect-ratio: 3/4;
+            background: linear-gradient(180deg, var(--navy-light) 0%, var(--navy-deep) 100%);
+            position: relative;
+        }
+
+        .about-image-placeholder::before {
+            content: '';
+            position: absolute;
+            inset: 15px;
+            border: 1px solid var(--brass);
+            opacity: 0.3;
+        }
+
+        .about-image-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--brass);
+            font-style: italic;
+            text-align: center;
+            opacity: 0.5;
+        }
+
+        .about-image-accent {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 150px;
+            height: 150px;
+            background: var(--brass);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--navy-deep);
+        }
+
+        .about-image-accent-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 500;
+            line-height: 1;
+        }
+
+        .about-image-accent-text {
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .about-text .section-label-text {
+            color: var(--brass);
+        }
+
+        .about-text .section-title {
+            color: var(--ivory);
+            margin-bottom: 2rem;
+        }
+
+        .about-text p {
+            color: var(--ivory);
+            opacity: 0.8;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .about-credentials {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .credential {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .credential-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(184, 149, 110, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brass);
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .credential-text {
+            color: var(--ivory);
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 8rem 5rem;
+            background: var(--ivory-dark);
+        }
+
+        .process .section-header {
+            text-align: center;
+            display: block;
+            max-width: 600px;
+            margin: 0 auto 5rem;
+        }
+
+        .process .section-label {
+            justify-content: center;
+        }
+
+        .process .section-title {
+            margin-bottom: 1rem;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            position: relative;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--brass), var(--brass-light), var(--brass));
+            opacity: 0.3;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--navy);
+            color: var(--brass);
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .process-step-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--navy);
+            margin-bottom: 0.75rem;
+        }
+
+        .process-step-desc {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--steel);
+        }
+
+        /* Testimonial */
+        .testimonial {
+            padding: 8rem 5rem;
+            background: var(--ivory);
+            text-align: center;
+        }
+
+        .testimonial-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--navy);
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            font-size: 10rem;
+            color: var(--brass);
+            opacity: 0.15;
+            position: absolute;
+            top: -4rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Playfair Display', serif;
+            line-height: 1;
+        }
+
+        .testimonial-author {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.3rem;
+        }
+
+        .testimonial-role {
+            font-size: 0.85rem;
+            color: var(--steel);
+        }
+
+        /* Contact Section */
+        .contact {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 80vh;
+        }
+
+        .contact-info {
+            background: var(--navy-deep);
+            padding: 6rem 5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-info .section-label-text {
+            color: var(--brass);
+        }
+
+        .contact-info .section-title {
+            color: var(--ivory);
+            margin-bottom: 2rem;
+        }
+
+        .contact-info > p {
+            color: var(--ivory);
+            opacity: 0.7;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+
+        .contact-details {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--brass);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--navy-deep);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-text h4 {
+            color: var(--ivory);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+        }
+
+        .contact-text p {
+            color: var(--ivory);
+            opacity: 0.7;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .contact-form-section {
+            background: var(--ivory-dark);
+            padding: 6rem 5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-form-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--navy);
+            margin-bottom: 2rem;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--navy);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 1rem 1.2rem;
+            border: 1px solid rgba(27, 43, 75, 0.2);
+            background: white;
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 1rem;
+            color: var(--charcoal);
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--brass);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            padding: 1.2rem 3rem;
+            background: var(--navy);
+            color: var(--ivory);
+            border: 2px solid var(--navy);
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .form-submit:hover {
+            background: var(--brass);
+            border-color: var(--brass);
+            color: var(--navy-deep);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--navy-deep);
+            padding: 5rem 5rem 2rem;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid rgba(184, 149, 110, 0.15);
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-brand .logo-icon {
+            background: var(--brass);
+        }
+
+        .footer-brand .logo-icon::before {
+            color: var(--navy-deep);
+        }
+
+        .footer-brand .logo-name {
+            color: var(--ivory);
+        }
+
+        .footer-brand .logo-title {
+            color: var(--brass-light);
+        }
+
+        .footer-brand p {
+            color: var(--ivory);
+            opacity: 0.6;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 300px;
+        }
+
+        .footer-links h4 {
+            color: var(--brass);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--ivory);
+            opacity: 0.6;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .footer-newsletter h4 {
+            color: var(--brass);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .footer-newsletter p {
+            color: var(--ivory);
+            opacity: 0.6;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.9rem 1rem;
+            border: 1px solid rgba(184, 149, 110, 0.3);
+            background: transparent;
+            color: var(--ivory);
+            font-family: 'Source Sans 3', sans-serif;
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(250, 249, 247, 0.4);
+        }
+
+        .newsletter-form button {
+            padding: 0.9rem 1.5rem;
+            background: var(--brass);
+            border: 1px solid var(--brass);
+            color: var(--navy-deep);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background: var(--brass-light);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            color: var(--ivory);
+            opacity: 0.4;
+            font-size: 0.85rem;
+        }
+
+        .footer-certifications {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .footer-certifications span {
+            color: var(--ivory);
+            opacity: 0.4;
+            font-size: 0.8rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(250, 249, 247, 0.2);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem;
+            }
+
+            .process-steps::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .hero-content {
+                padding: 8rem 2rem 4rem;
+            }
+
+            .section-header {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .services, .about, .process, .testimonial {
+                padding: 5rem 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-image {
+                display: none;
+            }
+
+            .contact {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info, .contact-form-section {
+                padding: 4rem 2rem;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+
+            footer {
+                padding: 3rem 2rem 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .trust-bar {
+                padding: 1.5rem 2rem;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-stats {
+                gap: 2rem;
+            }
+
+            .hero-stat-number {
+                font-size: 2rem;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .about-credentials {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-pattern"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <div class="logo-text">
+                <span class="logo-name">Dharma Wijaya</span>
+                <span class="logo-title">Notaris & PPAT</span>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#layanan">Layanan</a></li>
+            <li><a href="#tentang">Tentang Kami</a></li>
+            <li><a href="#proses">Cara Kerja</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+        </ul>
+        <a href="#kontak" class="nav-cta">Konsultasi Gratis</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span>Terdaftar Resmi di Kementerian Hukum dan HAM RI</span>
+            </div>
+            <h1 class="hero-title">Solusi Hukum <em>Terpercaya</em> untuk Kebutuhan Anda</h1>
+            <p class="hero-desc">Kantor Notaris dan PPAT yang melayani pembuatan akta autentik, pengesahan dokumen hukum, serta layanan pertanahan dengan integritas dan profesionalisme tinggi sejak 2009.</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number">15+</span>
+                    <span class="hero-stat-label">Tahun Pengalaman</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">5.000+</span>
+                    <span class="hero-stat-label">Akta Dibuat</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">98%</span>
+                    <span class="hero-stat-label">Klien Puas</span>
+                </div>
+            </div>
+            <div class="hero-buttons">
+                <a href="#kontak" class="btn-primary">Jadwalkan Konsultasi</a>
+                <a href="#layanan" class="btn-secondary">Lihat Layanan</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-visual-inner">
+                <div class="hero-pattern-overlay"></div>
+                <div class="hero-accent-line"></div>
+                <div class="floating-badge">
+                    <div class="floating-badge-number">A+</div>
+                    <div class="floating-badge-text">Rating Kepercayaan</div>
+                </div>
+                <div class="hero-decorative-text">LEX</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="trust-item">Terdaftar di INI (Ikatan Notaris Indonesia)</div>
+        <div class="trust-item">Anggota IPPAT Jambi</div>
+        <div class="trust-item">Sertifikasi ISO 9001:2015</div>
+        <div class="trust-item">Layanan Cepat & Transparan</div>
+    </div>
+
+    <!-- Services Section -->
+    <section class="services" id="layanan">
+        <div class="section-header reveal">
+            <div>
+                <div class="section-label">
+                    <div class="section-label-line"></div>
+                    <span class="section-label-text">Layanan Kami</span>
+                </div>
+                <h2 class="section-title">Layanan Notaris & PPAT Profesional</h2>
+            </div>
+            <p class="section-desc">Kami menyediakan berbagai layanan hukum untuk individu maupun badan usaha dengan standar profesionalisme tertinggi dan kepatuhan penuh terhadap peraturan perundang-undangan yang berlaku.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-number">01</div>
+                <h3 class="service-title">Akta Pendirian PT & CV</h3>
+                <p class="service-desc">Pembuatan akta pendirian badan usaha, perubahan anggaran dasar, dan dokumen korporasi lainnya sesuai ketentuan hukum yang berlaku.</p>
+                <a href="#kontak" class="service-link">Pelajari Lebih Lanjut</a>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-number">02</div>
+                <h3 class="service-title">Akta Jual Beli Tanah</h3>
+                <p class="service-desc">Pembuatan Akta Jual Beli (AJB) untuk transaksi properti dan tanah dengan proses yang aman, cepat, dan sesuai prosedur BPN.</p>
+                <a href="#kontak" class="service-link">Pelajari Lebih Lanjut</a>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-number">03</div>
+                <h3 class="service-title">Akta Perjanjian & Kontrak</h3>
+                <p class="service-desc">Penyusunan dan legalisasi berbagai perjanjian bisnis, sewa-menyewa, kerjasama, dan kontrak kerja yang mengikat secara hukum.</p>
+                <a href="#kontak" class="service-link">Pelajari Lebih Lanjut</a>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-number">04</div>
+                <h3 class="service-title">Akta Waris & Hibah</h3>
+                <p class="service-desc">Pembuatan akta pembagian waris, hibah, dan wasiat untuk memastikan peralihan hak yang sah dan menghindari sengketa di kemudian hari.</p>
+                <a href="#kontak" class="service-link">Pelajari Lebih Lanjut</a>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-number">05</div>
+                <h3 class="service-title">Legalisasi & Waarmerking</h3>
+                <p class="service-desc">Pengesahan tanda tangan, legalisasi dokumen, dan waarmerking untuk keperluan administrasi dalam dan luar negeri.</p>
+                <a href="#kontak" class="service-link">Pelajari Lebih Lanjut</a>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-number">06</div>
+                <h3 class="service-title">Balik Nama Sertifikat</h3>
+                <p class="service-desc">Pengurusan balik nama sertifikat tanah dan bangunan di BPN dengan proses yang transparan dan pendampingan penuh.</p>
+                <a href="#kontak" class="service-link">Pelajari Lebih Lanjut</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="tentang">
+        <div class="about-content">
+            <div class="about-image reveal">
+                <div class="about-image-placeholder">
+                    <span class="about-image-text">Dharma Wijaya, S.H., M.Kn.</span>
+                </div>
+                <div class="about-image-accent">
+                    <span class="about-image-accent-number">15</span>
+                    <span class="about-image-accent-text">Tahun Dedikasi</span>
+                </div>
+            </div>
+            <div class="about-text reveal">
+                <div class="section-label">
+                    <div class="section-label-line"></div>
+                    <span class="section-label-text">Tentang Kami</span>
+                </div>
+                <h2 class="section-title">Komitmen pada Integritas dan Keunggulan Hukum</h2>
+                <p>Kantor Notaris dan PPAT Dharma Wijaya didirikan dengan visi untuk memberikan layanan hukum yang profesional, transparan, dan dapat diandalkan bagi masyarakat Jambi dan sekitarnya.</p>
+                <p>Dengan pengalaman lebih dari 15 tahun, kami telah dipercaya oleh ribuan klien individu dan korporat dalam menangani berbagai kebutuhan hukum mereka. Setiap akta yang kami buat dijamin keabsahan dan kekuatan hukumnya.</p>
+                <div class="about-credentials">
+                    <div class="credential">
+                        <div class="credential-icon">🎓</div>
+                        <span class="credential-text">Magister Kenotariatan Universitas Indonesia</span>
+                    </div>
+                    <div class="credential">
+                        <div class="credential-icon">📜</div>
+                        <span class="credential-text">SK Menkumham No. AHU-XXX.AH.02.01</span>
+                    </div>
+                    <div class="credential">
+                        <div class="credential-icon">🏛️</div>
+                        <span class="credential-text">Anggota Aktif INI Wilayah Jambi</span>
+                    </div>
+                    <div class="credential">
+                        <div class="credential-icon">✅</div>
+                        <span class="credential-text">PPAT Wilayah Kerja Kota Jambi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="proses">
+        <div class="section-header reveal">
+            <div class="section-label">
+                <div class="section-label-line"></div>
+                <span class="section-label-text">Cara Kerja Kami</span>
+            </div>
+            <h2 class="section-title">Proses yang Mudah dan Transparan</h2>
+            <p class="section-desc">Kami memastikan setiap langkah proses hukum Anda berjalan lancar dengan komunikasi yang jelas.</p>
+        </div>
+        <div class="process-steps">
+            <div class="process-step reveal">
+                <div class="process-step-number">1</div>
+                <h3 class="process-step-title">Konsultasi Awal</h3>
+                <p class="process-step-desc">Diskusikan kebutuhan hukum Anda dengan tim kami secara gratis untuk mendapatkan solusi terbaik.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="process-step-number">2</div>
+                <h3 class="process-step-title">Pengumpulan Dokumen</h3>
+                <p class="process-step-desc">Tim kami akan membantu menyiapkan dan memverifikasi kelengkapan dokumen yang diperlukan.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="process-step-number">3</div>
+                <h3 class="process-step-title">Penyusunan Akta</h3>
+                <p class="process-step-desc">Notaris menyusun draft akta yang akan direview bersama sebelum penandatanganan final.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="process-step-number">4</div>
+                <h3 class="process-step-title">Penandatanganan & Pengesahan</h3>
+                <p class="process-step-desc">Proses penandatanganan akta di hadapan notaris dan pengurusan legalitas selanjutnya.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="testimonial">
+        <div class="section-header reveal">
+            <div class="section-label" style="justify-content: center;">
+                <div class="section-label-line"></div>
+                <span class="section-label-text">Testimoni Klien</span>
+            </div>
+        </div>
+        <div class="testimonial-inner reveal">
+            <p class="testimonial-quote">Proses pembuatan akta pendirian PT kami berjalan sangat lancar. Pak Dharma dan timnya sangat profesional, responsif, dan memberikan penjelasan yang mudah dipahami. Sangat merekomendasikan untuk urusan notaris dan PPAT.</p>
+            <p class="testimonial-author">Ir. Bambang Sutrisno</p>
+            <p class="testimonial-role">Direktur PT Mitra Sejahtera Jambi</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="kontak">
+        <div class="contact-info">
+            <div class="section-label">
+                <div class="section-label-line"></div>
+                <span class="section-label-text">Hubungi Kami</span>
+            </div>
+            <h2 class="section-title">Siap Membantu Kebutuhan Hukum Anda</h2>
+            <p>Jangan ragu untuk menghubungi kami. Konsultasi awal gratis dan tanpa kewajiban untuk semua layanan notaris dan PPAT.</p>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-text">
+                        <h4>Alamat Kantor</h4>
+                        <p>Jl. Jenderal Sudirman No. 45<br>Telanaipura, Kota Jambi<br>Jambi 36122, Indonesia</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🕐</div>
+                    <div class="contact-text">
+                        <h4>Jam Operasional</h4>
+                        <p>Senin - Jumat: 08.00 - 17.00 WIB<br>Sabtu: 08.00 - 12.00 WIB<br>Minggu & Hari Libur: Tutup</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-text">
+                        <h4>Telepon & WhatsApp</h4>
+                        <p>+62 741 765 4321<br>+62 812 3456 7890 (WhatsApp)</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div class="contact-text">
+                        <h4>Email</h4>
+                        <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b9d0d7dfd6f9d7d6cdd8cbd0ca94ddd1d8cbd4d8ced0d3d8c0d897dad697d0dd">[email&#160;protected]</a><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="761d191805031a0217051f3618190217041f055b121e17041b17011f1c170f17581519581f12">[email&#160;protected]</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contact-form-section">
+            <h3 class="contact-form-title">Kirim Pesan atau Jadwalkan Konsultasi</h3>
+            <form class="contact-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nama Lengkap</label>
+                        <input type="text" placeholder="Masukkan nama lengkap Anda">
+                    </div>
+                    <div class="form-group">
+                        <label>Nomor Telepon</label>
+                        <input type="tel" placeholder="Contoh: 0812xxxxxxxx">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Alamat Email</label>
+                    <input type="email" placeholder="Masukkan alamat email Anda">
+                </div>
+                <div class="form-group">
+                    <label>Jenis Layanan yang Dibutuhkan</label>
+                    <select>
+                        <option value="">-- Pilih Layanan --</option>
+                        <option value="pendirian-pt">Akta Pendirian PT/CV</option>
+                        <option value="jual-beli">Akta Jual Beli Tanah</option>
+                        <option value="perjanjian">Akta Perjanjian/Kontrak</option>
+                        <option value="waris">Akta Waris/Hibah</option>
+                        <option value="legalisasi">Legalisasi Dokumen</option>
+                        <option value="balik-nama">Balik Nama Sertifikat</option>
+                        <option value="lainnya">Lainnya</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Pesan atau Pertanyaan</label>
+                    <textarea placeholder="Jelaskan secara singkat kebutuhan hukum Anda..."></textarea>
+                </div>
+                <button type="submit" class="form-submit">Kirim Pesan</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="logo">
+                    <div class="logo-icon"></div>
+                    <div class="logo-text">
+                        <span class="logo-name">Dharma Wijaya</span>
+                        <span class="logo-title">Notaris & PPAT</span>
+                    </div>
+                </div>
+                <p>Kantor Notaris dan PPAT terpercaya di Jambi yang berkomitmen memberikan layanan hukum profesional dengan integritas tinggi.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Layanan</h4>
+                <ul>
+                    <li><a href="#">Akta Pendirian Usaha</a></li>
+                    <li><a href="#">Akta Jual Beli</a></li>
+                    <li><a href="#">Akta Perjanjian</a></li>
+                    <li><a href="#">Legalisasi Dokumen</a></li>
+                    <li><a href="#">Balik Nama Sertifikat</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Navigasi</h4>
+                <ul>
+                    <li><a href="#layanan">Layanan Kami</a></li>
+                    <li><a href="#tentang">Tentang Kami</a></li>
+                    <li><a href="#proses">Cara Kerja</a></li>
+                    <li><a href="#kontak">Hubungi Kami</a></li>
+                    <li><a href="#">Kebijakan Privasi</a></li>
+                </ul>
+            </div>
+            <div class="footer-newsletter">
+                <h4>Informasi Hukum</h4>
+                <p>Berlangganan newsletter kami untuk mendapatkan informasi terbaru seputar regulasi dan tips hukum.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Alamat email Anda">
+                    <button type="submit">→</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Kantor Notaris & PPAT Dharma Wijaya, S.H., M.Kn. Hak Cipta Dilindungi.</p>
+            <div class="footer-certifications">
+                <span>INI</span>
+                <span>IPPAT</span>
+                <span>Kemenkumham</span>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Reveal on scroll
+        const reveals = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const revealTop = el.getBoundingClientRect().top;
+                const revealPoint = 120;
+
+                if (revealTop < windowHeight - revealPoint) {
+                    el.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+         

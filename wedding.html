@@ -1,0 +1,1924 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eternia Studio | Wedding Photography Jambi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blush: #E8D5D5;
+            --blush-dark: #D4B8B8;
+            --rose: #C9A0A0;
+            --champagne: #F5E6D3;
+            --champagne-dark: #E8D4BC;
+            --sage: #B8C5B2;
+            --sage-dark: #9AAF92;
+            --ivory: #FDFBF9;
+            --ivory-dark: #F7F3EF;
+            --charcoal: #3D3D3D;
+            --charcoal-light: #5A5A5A;
+            --gold: #C4A77D;
+            --gold-light: #D4BC9A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--ivory);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+
+        /* Elegant Floral Pattern Overlay */
+        .floral-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.015;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A0A0' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 12px;
+            height: 12px;
+            background: var(--rose);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-ring {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--rose);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.15s ease, width 0.2s ease, height 0.2s ease;
+        }
+
+        .cursor-ring.hover {
+            width: 60px;
+            height: 60px;
+            border-color: var(--gold);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(253, 251, 249, 0.98), rgba(253, 251, 249, 0));
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(253, 251, 249, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 40px rgba(61, 61, 61, 0.05);
+            padding: 1rem 5rem;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-name {
+            font-family: 'Cormorant', serif;
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            color: var(--charcoal);
+        }
+
+        .logo-tagline {
+            font-size: 0.6rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--rose);
+            margin-top: -2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 0.8rem 2rem;
+            background: transparent;
+            border: 1px solid var(--charcoal);
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--charcoal);
+            color: var(--ivory);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+        }
+
+        .hero-content {
+            padding: 10rem 5rem 5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-ornament {
+            font-family: 'Cormorant', serif;
+            font-size: 8rem;
+            font-style: italic;
+            color: var(--blush);
+            line-height: 0.8;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeIn 1s ease 0.3s forwards;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            line-height: 1.2;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 1s ease 0.5s forwards;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--rose);
+        }
+
+        .hero-desc {
+            font-size: 1rem;
+            line-height: 2;
+            color: var(--charcoal-light);
+            max-width: 450px;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeIn 1s ease 0.7s forwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 1s ease 0.9s forwards;
+        }
+
+        .btn-primary {
+            padding: 1.1rem 2.5rem;
+            background: var(--charcoal);
+            color: var(--ivory);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            border: 1px solid var(--charcoal);
+        }
+
+        .btn-primary:hover {
+            background: var(--rose);
+            border-color: var(--rose);
+        }
+
+        .btn-secondary {
+            padding: 1.1rem 2.5rem;
+            background: transparent;
+            border: 1px solid var(--charcoal);
+            color: var(--charcoal);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--champagne);
+            border-color: var(--champagne);
+        }
+
+        .hero-visual {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 1rem;
+            padding: 8rem 3rem 3rem;
+        }
+
+        .hero-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant', serif;
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--rose);
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .hero-image:nth-child(1) .hero-image-placeholder {
+            background: linear-gradient(135deg, var(--blush) 0%, var(--champagne) 100%);
+        }
+
+        .hero-image:nth-child(2) .hero-image-placeholder {
+            background: linear-gradient(135deg, var(--sage) 0%, var(--champagne) 100%);
+        }
+
+        .hero-image:nth-child(3) .hero-image-placeholder {
+            background: linear-gradient(135deg, var(--champagne) 0%, var(--blush) 100%);
+        }
+
+        .hero-image:nth-child(4) .hero-image-placeholder {
+            background: linear-gradient(135deg, var(--blush-dark) 0%, var(--sage) 100%);
+        }
+
+        .hero-image:nth-child(1) {
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        .hero-image:nth-child(2) {
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+            opacity: 0;
+        }
+
+        .hero-image:nth-child(3) {
+            animation: fadeInUp 0.8s ease 0.8s forwards;
+            opacity: 0;
+        }
+
+        .hero-image:nth-child(4) {
+            animation: fadeInUp 0.8s ease 1s forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 3rem;
+            left: 5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeIn 1s ease 1.2s forwards;
+        }
+
+        .scroll-hint-line {
+            width: 60px;
+            height: 1px;
+            background: var(--charcoal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-hint-line::after {
+            content: '';
+            position: absolute;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--rose);
+            animation: scrollLine 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollLine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .scroll-hint span {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--charcoal-light);
+        }
+
+        /* About Section */
+        .about {
+            padding: 10rem 5rem;
+            background: var(--ivory);
+            position: relative;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .about-images {
+            position: relative;
+        }
+
+        .about-image-main {
+            width: 100%;
+            aspect-ratio: 3/4;
+            background: linear-gradient(180deg, var(--blush) 0%, var(--sage) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-image-main span {
+            font-family: 'Cormorant', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--charcoal);
+            opacity: 0.5;
+        }
+
+        .about-image-accent {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 200px;
+            height: 250px;
+            background: linear-gradient(135deg, var(--champagne) 0%, var(--gold-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .about-image-accent span {
+            font-family: 'Cormorant', serif;
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--charcoal);
+            opacity: 0.5;
+        }
+
+        .about-text {
+            padding-right: 3rem;
+        }
+
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-label-line {
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .section-label-text {
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--rose);
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-family: 'Cormorant', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            color: var(--charcoal);
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title em {
+            font-style: italic;
+            color: var(--rose);
+        }
+
+        .about-text p {
+            font-size: 1rem;
+            line-height: 2;
+            color: var(--charcoal-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-signature {
+            margin-top: 2rem;
+        }
+
+        .about-signature-text {
+            font-family: 'Cormorant', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--charcoal);
+            margin-bottom: 0.3rem;
+        }
+
+        .about-signature-role {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--rose);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 10rem 5rem;
+            background: var(--ivory-dark);
+        }
+
+        .services-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 5rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--ivory);
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid transparent;
+            position: relative;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            width: 60%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+            border-color: var(--blush);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--blush);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .service-title {
+            font-family: 'Cormorant', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--charcoal);
+            margin-bottom: 0.75rem;
+        }
+
+        .service-desc {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: var(--charcoal-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-price {
+            font-family: 'Cormorant', serif;
+            font-size: 1.3rem;
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        /* Packages Section */
+        .packages {
+            padding: 10rem 5rem;
+            background: var(--charcoal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .packages::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(200, 160, 160, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(184, 197, 178, 0.08) 0%, transparent 50%);
+        }
+
+        .packages-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .packages-header .section-label-text {
+            color: var(--gold);
+        }
+
+        .packages-header .section-title {
+            color: var(--ivory);
+        }
+
+        .packages-header p {
+            color: var(--ivory);
+            opacity: 0.7;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .package-card {
+            background: rgba(253, 251, 249, 0.03);
+            border: 1px solid rgba(253, 251, 249, 0.1);
+            padding: 3rem 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .package-card.featured {
+            background: rgba(253, 251, 249, 0.08);
+            border-color: var(--gold);
+            transform: scale(1.05);
+        }
+
+        .package-card:hover {
+            background: rgba(253, 251, 249, 0.08);
+            border-color: var(--rose);
+        }
+
+        .package-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: var(--charcoal);
+            padding: 0.4rem 1.5rem;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .package-name {
+            font-family: 'Cormorant', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--ivory);
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .package-price {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(253, 251, 249, 0.1);
+        }
+
+        .package-price-amount {
+            font-family: 'Cormorant', serif;
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: var(--gold);
+        }
+
+        .package-price-note {
+            font-size: 0.8rem;
+            color: var(--ivory);
+            opacity: 0.5;
+        }
+
+        .package-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .package-features li {
+            color: var(--ivory);
+            opacity: 0.8;
+            font-size: 0.9rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(253, 251, 249, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .package-features li::before {
+            content: '✓';
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .package-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: transparent;
+            border: 1px solid var(--ivory);
+            color: var(--ivory);
+            text-decoration: none;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .package-btn:hover {
+            background: var(--ivory);
+            color: var(--charcoal);
+        }
+
+        .package-card.featured .package-btn {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--charcoal);
+        }
+
+        .package-card.featured .package-btn:hover {
+            background: var(--ivory);
+            border-color: var(--ivory);
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 10rem 5rem;
+            background: var(--ivory);
+        }
+
+        .portfolio-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 5rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 300px);
+            gap: 1rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .portfolio-item:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .portfolio-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant', serif;
+            font-size: 1rem;
+            font-style: italic;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-item:hover .portfolio-placeholder {
+            transform: scale(1.05);
+        }
+
+        .portfolio-item:nth-child(1) .portfolio-placeholder {
+            background: linear-gradient(135deg, var(--rose) 0%, var(--blush-dark) 100%);
+        }
+
+        .portfolio-item:nth-child(2) .portfolio-placeholder {
+            background: linear-gradient(135deg, var(--sage) 0%, var(--sage-dark) 100%);
+        }
+
+        .portfolio-item:nth-child(3) .portfolio-placeholder {
+            background: linear-gradient(135deg, var(--champagne-dark) 0%, var(--gold) 100%);
+        }
+
+        .portfolio-item:nth-child(4) .portfolio-placeholder {
+            background: linear-gradient(135deg, var(--blush) 0%, var(--rose) 100%);
+        }
+
+        .portfolio-item:nth-child(5) .portfolio-placeholder {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--champagne) 100%);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(61, 61, 61, 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            background: rgba(61, 61, 61, 0.5);
+        }
+
+        .portfolio-overlay span {
+            color: var(--ivory);
+            font-family: 'Cormorant', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay span {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Testimonial Section */
+        .testimonials {
+            padding: 10rem 5rem;
+            background: var(--blush);
+            text-align: center;
+        }
+
+        .testimonials-header {
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-quote {
+            font-family: 'Cormorant', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            font-weight: 300;
+            line-height: 1.7;
+            color: var(--charcoal);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            font-size: 8rem;
+            color: var(--ivory);
+            position: absolute;
+            top: -3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Cormorant', serif;
+            line-height: 1;
+            z-index: 0;
+        }
+
+        .testimonial-author {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 0.3rem;
+        }
+
+        .testimonial-event {
+            font-size: 0.85rem;
+            color: var(--charcoal-light);
+            font-style: italic;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 10rem 5rem;
+            background: var(--ivory);
+        }
+
+        .process-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 5rem;
+        }
+
+        .process-timeline {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2rem;
+            position: relative;
+        }
+
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--rose), var(--gold), var(--rose), transparent);
+        }
+
+        .process-step {
+            text-align: center;
+        }
+
+        .process-step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--ivory);
+            border: 2px solid var(--rose);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-family: 'Cormorant', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--rose);
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover .process-step-number {
+            background: var(--rose);
+            color: var(--ivory);
+        }
+
+        .process-step-title {
+            font-family: 'Cormorant', serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--charcoal);
+            margin-bottom: 0.5rem;
+        }
+
+        .process-step-desc {
+            font-size: 0.85rem;
+            color: var(--charcoal-light);
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 80vh;
+        }
+
+        .contact-info {
+            background: var(--charcoal);
+            padding: 6rem 5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-info .section-label-text {
+            color: var(--gold);
+        }
+
+        .contact-info .section-title {
+            color: var(--ivory);
+            margin-bottom: 2rem;
+        }
+
+        .contact-info > p {
+            color: var(--ivory);
+            opacity: 0.7;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+
+        .contact-details {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(196, 167, 125, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .contact-text h4 {
+            color: var(--ivory);
+            font-family: 'Cormorant', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-text p {
+            color: var(--ivory);
+            opacity: 0.7;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .contact-form-section {
+            background: var(--ivory-dark);
+            padding: 6rem 5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-form-title {
+            font-family: 'Cormorant', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--charcoal);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-form-subtitle {
+            font-size: 0.9rem;
+            color: var(--charcoal-light);
+            margin-bottom: 2rem;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--charcoal);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 1rem;
+            border: 1px solid var(--blush);
+            background: var(--ivory);
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.95rem;
+            color: var(--charcoal);
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--rose);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            padding: 1.1rem 2.5rem;
+            background: var(--charcoal);
+            color: var(--ivory);
+            border: 1px solid var(--charcoal);
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .form-submit:hover {
+            background: var(--rose);
+            border-color: var(--rose);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            padding: 5rem 5rem 2rem;
+            border-top: 1px solid rgba(253, 251, 249, 0.1);
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid rgba(253, 251, 249, 0.1);
+        }
+
+        .footer-brand .logo-name {
+            color: var(--ivory);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-brand .logo-tagline {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-brand p {
+            color: var(--ivory);
+            opacity: 0.6;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            max-width: 280px;
+        }
+
+        .footer-links h4 {
+            color: var(--gold);
+            font-family: 'Cormorant', serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--ivory);
+            opacity: 0.6;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--rose);
+        }
+
+        .footer-social h4 {
+            color: var(--gold);
+            font-family: 'Cormorant', serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(253, 251, 249, 0.05);
+            border: 1px solid rgba(253, 251, 249, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ivory);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--rose);
+            border-color: var(--rose);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            color: var(--ivory);
+            opacity: 0.4;
+            font-size: 0.85rem;
+        }
+
+        .footer-awards {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .footer-awards span {
+            color: var(--ivory);
+            opacity: 0.4;
+            font-size: 0.75rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(253, 251, 249, 0.2);
+            border-radius: 20px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .packages-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .package-card.featured {
+                transform: scale(1);
+            }
+
+            .process-timeline {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .process-timeline::before {
+                display: none;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 250px);
+            }
+
+            .portfolio-item:nth-child(1) {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content {
+                padding: 8rem 2rem 4rem;
+                text-align: center;
+                align-items: center;
+            }
+
+            .hero-desc {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .about, .services, .packages, .portfolio, .process, .testimonials {
+                padding: 5rem 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-images {
+                order: -1;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .about-text {
+                padding-right: 0;
+                text-align: center;
+            }
+
+            .section-label {
+                justify-content: center;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .process-timeline {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info, .contact-form-section {
+                padding: 4rem 2rem;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+
+            footer {
+                padding: 3rem 2rem 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(5, 200px);
+            }
+
+            .portfolio-item:nth-child(1) {
+                grid-column: span 1;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .scroll-hint {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floral-overlay"></div>
+    <div class="cursor"></div>
+    <div class="cursor-ring"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <span class="logo-name">ETERNIA</span>
+            <span class="logo-tagline">Wedding Photography</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#tentang">Tentang</a></li>
+            <li><a href="#layanan">Layanan</a></li>
+            <li><a href="#paket">Paket</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+        </ul>
+        <a href="#kontak" class="nav-cta">Konsultasi</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-ornament">&</div>
+            <h1 class="hero-title">Mengabadikan <em>Kisah Cinta</em> dalam Setiap Frame</h1>
+            <p class="hero-desc">Setiap momen pernikahan adalah cerita unik yang layak diabadikan dengan keindahan dan ketulusan. Kami hadir untuk menangkap emosi, tawa, dan air mata bahagia di hari istimewa Anda.</p>
+            <div class="hero-buttons">
+                <a href="#kontak" class="btn-primary">Jadwalkan Konsultasi</a>
+                <a href="#portfolio" class="btn-secondary">Lihat Portfolio</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-image">
+                <div class="hero-image-placeholder">Pre-wedding<br>Session</div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-placeholder">Wedding<br>Day</div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-placeholder">Holy<br>Matrimony</div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-placeholder">Reception<br>Party</div>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <div class="scroll-hint-line"></div>
+            <span>Scroll untuk melihat lebih</span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="tentang">
+        <div class="about-content">
+            <div class="about-images reveal">
+                <div class="about-image-main">
+                    <span>Fotografer di Balik Lensa</span>
+                </div>
+                <div class="about-image-accent">
+                    <span>Sejak 2015</span>
+                </div>
+            </div>
+            <div class="about-text reveal">
+                <div class="section-label">
+                    <div class="section-label-line"></div>
+                    <span class="section-label-text">Tentang Kami</span>
+                </div>
+                <h2 class="section-title">Lebih dari Sekadar <em>Fotografi</em></h2>
+                <p>Eternia Studio didirikan dengan keyakinan bahwa setiap pasangan memiliki cerita cinta yang unik dan layak diabadikan dengan cara yang istimewa. Kami tidak hanya mengambil foto — kami menangkap emosi, momen, dan memori yang akan bertahan seumur hidup.</p>
+                <p>Dengan pengalaman lebih dari 8 tahun dan telah mengabadikan lebih dari 500 pernikahan di Jambi dan sekitarnya, tim kami memahami bahwa hari pernikahan Anda adalah salah satu hari terpenting dalam hidup. Setiap detail, setiap senyuman, setiap air mata bahagia — semuanya berharga.</p>
+                <div class="about-signature">
+                    <p class="about-signature-text">Rania & Dimas</p>
+                    <p class="about-signature-role">Founder & Lead Photographers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="layanan">
+        <div class="services-header reveal">
+            <div class="section-label" style="justify-content: center;">
+                <div class="section-label-line"></div>
+                <span class="section-label-text">Layanan Kami</span>
+            </div>
+            <h2 class="section-title">Layanan untuk <em>Setiap Momen</em></h2>
+        </div>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-icon">💍</div>
+                <h3 class="service-title">Pre-Wedding</h3>
+                <p class="service-desc">Sesi foto romantis sebelum hari H di lokasi pilihan Anda. Indoor studio atau outdoor di destinasi impian.</p>
+                <p class="service-price">Mulai dari Rp 5.500.000</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">👰</div>
+                <h3 class="service-title">Wedding Day</h3>
+                <p class="service-desc">Dokumentasi lengkap hari pernikahan Anda dari persiapan hingga resepsi. Full day coverage.</p>
+                <p class="service-price">Mulai dari Rp 12.000.000</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">💒</div>
+                <h3 class="service-title">Holy Matrimony</h3>
+                <p class="service-desc">Dokumentasi sakral upacara pemberkatan pernikahan Anda di gereja atau tempat ibadah.</p>
+                <p class="service-price">Mulai dari Rp 4.500.000</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">📸</div>
+                <h3 class="service-title">Engagement</h3>
+                <p class="service-desc">Abadikan momen lamaran atau tunangan yang penuh kebahagiaan bersama orang terkasih.</p>
+                <p class="service-price">Mulai dari Rp 3.500.000</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">🎬</div>
+                <h3 class="service-title">Cinematic Video</h3>
+                <p class="service-desc">Video sinematik berkualitas tinggi yang menceritakan kisah cinta Anda dengan indah.</p>
+                <p class="service-price">Mulai dari Rp 8.000.000</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">📖</div>
+                <h3 class="service-title">Album & Prints</h3>
+                <p class="service-desc">Album foto premium dengan desain eksklusif dan cetak fine art berkualitas museum.</p>
+                <p class="service-price">Mulai dari Rp 2.500.000</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section class="packages" id="paket">
+        <div class="packages-header reveal">
+            <div class="section-label" style="justify-content: center;">
+                <div class="section-label-line"></div>
+                <span class="section-label-text">Paket Pernikahan</span>
+            </div>
+            <h2 class="section-title">Pilih Paket <em>Impian</em> Anda</h2>
+            <p>Setiap paket dapat disesuaikan dengan kebutuhan dan budget Anda. Konsultasikan dengan tim kami untuk penawaran terbaik.</p>
+        </div>
+        <div class="packages-grid">
+            <div class="package-card reveal">
+                <h3 class="package-name">Intimate</h3>
+                <div class="package-price">
+                    <div class="package-price-amount">Rp 15.000.000</div>
+                    <div class="package-price-note">Untuk pernikahan intim</div>
+                </div>
+                <ul class="package-features">
+                    <li>1 Fotografer profesional</li>
+                    <li>6 jam coverage</li>
+                    <li>200+ foto edited</li>
+                    <li>50 foto cetak 4R</li>
+                    <li>Album softcover 20x30</li>
+                    <li>Online gallery</li>
+                    <li>Free engagement session</li>
+                </ul>
+                <a href="#kontak" class="package-btn">Pilih Paket</a>
+            </div>
+            <div class="package-card featured reveal">
+                <span class="package-badge">Paling Populer</span>
+                <h3 class="package-name">Eternal</h3>
+                <div class="package-price">
+                    <div class="package-price-amount">Rp 28.000.000</div>
+                    <div class="package-price-note">Best value package</div>
+                </div>
+                <ul class="package-features">
+                    <li>2 Fotografer + 1 Videografer</li>
+                    <li>Full day coverage (12 jam)</li>
+                    <li>500+ foto edited</li>
+                    <li>Cinematic highlight 3-5 menit</li>
+                    <li>Full ceremony video</li>
+                    <li>Album hardcover premium</li>
+                    <li>100 foto cetak + frame</li>
+                    <li>Pre-wedding session included</li>
+                </ul>
+                <a href="#kontak" class="package-btn">Pilih Paket</a>
+            </div>
+            <div class="package-card reveal">
+                <h3 class="package-name">Grand</h3>
+                <div class="package-price">
+                    <div class="package-price-amount">Rp 45.000.000</div>
+                    <div class="package-price-note">Luxury complete package</div>
+                </div>
+                <ul class="package-features">
+                    <li>3 Fotografer + 2 Videografer</li>
+                    <li>2 hari full coverage</li>
+                    <li>1000+ foto edited</li>
+                    <li>Same day edit video</li>
+                    <li>Cinematic film 10-15 menit</li>
+                    <li>2 Album premium + box</li>
+                    <li>Pre-wedding + engagement</li>
+                    <li>Drone aerial coverage</li>
+                </ul>
+                <a href="#kontak" class="package-btn">Pilih Paket</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="portfolio-header reveal">
+            <div class="section-label" style="justify-content: center;">
+                <div class="section-label-line"></div>
+                <span class="section-label-text">Portfolio Kami</span>
+            </div>
+            <h2 class="section-title">Kisah Cinta yang Telah <em>Kami Abadikan</em></h2>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-item reveal">
+                <div class="portfolio-placeholder">Andi & Sari<br>Jambi, 2024</div>
+                <div class="portfolio-overlay"><span>Lihat Cerita</span></div>
+            </div>
+            <div class="portfolio-item reveal">
+                <div class="portfolio-placeholder">Budi & Maya<br>Muaro Jambi</div>
+                <div class="portfolio-overlay"><span>Lihat Cerita</span></div>
+            </div>
+            <div class="portfolio-item reveal">
+                <div class="portfolio-placeholder">Rizky & Dewi<br>Sungai Penuh</div>
+                <div class="portfolio-overlay"><span>Lihat Cerita</span></div>
+            </div>
+            <div class="portfolio-item reveal">
+                <div class="portfolio-placeholder">Fajar & Indah<br>Kerinci</div>
+                <div class="portfolio-overlay"><span>Lihat Cerita</span></div>
+            </div>
+            <div class="portfolio-item reveal">
+                <div class="portfolio-placeholder">Kevin & Lia<br>Kota Jambi</div>
+                <div class="portfolio-overlay"><span>Lihat Cerita</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="testimonials-header reveal">
+            <div class="section-label" style="justify-content: center;">
+                <div class="section-label-line"></div>
+                <span class="section-label-text">Testimoni</span>
+            </div>
+            <h2 class="section-title">Kata Mereka tentang <em>Eternia</em></h2>
+        </div>
+        <div class="testimonial-slider reveal">
+            <p class="testimonial-quote">Tim Eternia benar-benar luar biasa! Mereka tidak hanya profesional, tapi juga sangat memahami apa yang kami inginkan. Setiap foto menangkap emosi yang begitu nyata. Kami sangat bersyukur memilih Eternia untuk hari spesial kami.</p>
+            <p class="testimonial-author">Andi & Sari Wijaya</p>
+            <p class="testimonial-event">Married on December 2024, The Venue Jambi</p>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="process-header reveal">
+            <div class="section-label" style="justify-content: center;">
+                <div class="section-label-line"></div>
+                <span class="section-label-text">Cara Kerja</span>
+            </div>
+            <h2 class="section-title">Perjalanan Bersama <em>Eternia</em></h2>
+        </div>
+        <div class="process-timeline">
+            <div class="process-step reveal">
+                <div class="process-step-number">01</div>
+                <h3 class="process-step-title">Konsultasi</h3>
+                <p class="process-step-desc">Diskusikan visi dan impian pernikahan Anda bersama tim kami.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="process-step-number">02</div>
+                <h3 class="process-step-title">Proposal</h3>
+                <p class="process-step-desc">Kami menyiapkan penawaran custom sesuai kebutuhan Anda.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="process-step-number">03</div>
+                <h3 class="process-step-title">Booking</h3>
+                <p class="process-step-desc">Konfirmasi tanggal dan amankan jadwal Anda dengan DP.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="process-step-number">04</div>
+                <h3 class="process-step-title">Sesi Foto</h3>
+                <p class="process-step-desc">Nikmati sesi foto dengan tim profesional kami.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="process-step-number">05</div>
+                <h3 class="process-step-title">Delivery</h3>
+                <p class="process-step-desc">Terima hasil foto dan video yang telah diedit dengan indah.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="kontak">
+        <div class="contact-info">
+            <div class="section-label">
+                <div class="section-label-line"></div>
+                <span class="section-label-text">Hubungi Kami</span>
+            </div>
+            <h2 class="section-title">Mari Wujudkan <em>Impian</em> Anda</h2>
+            <p>Kami sangat senang mendengar cerita cinta Anda. Hubungi kami untuk konsultasi gratis dan mari diskusikan bagaimana kami bisa mengabadikan momen terindah dalam hidup Anda.</p>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-text">
+                        <h4>Studio</h4>
+                        <p>Jl. Kapten Pattimura No. 56<br>Telanaipura, Kota Jambi 36124</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🕐</div>
+                    <div class="contact-text">
+                        <h4>Jam Operasional</h4>
+                        <p>Senin - Sabtu: 09.00 - 18.00 WIB<br>Minggu: By Appointment</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-text">
+                        <h4>Telepon & WhatsApp</h4>
+                        <p>+62 812 7890 1234<br>+62 741 987 654</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div class="contact-text">
+                        <h4>Email</h4>
+                        <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cca4a9a0a0a38ca9b8a9bea2a5adbfb8b9a8a5a3e2a5a8">[email&#160;protected]</a><br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cdafa2a2a6a4a3aa8da8b9a8bfa3a4acbeb9b8a9a4a2e3a4a9">[email&#160;protected]</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contact-form-section">
+            <h3 class="contact-form-title">Ceritakan Rencana Pernikahan Anda</h3>
+            <p class="contact-form-subtitle">Kami akan merespons dalam 24 jam</p>
+            <form class="contact-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nama Mempelai Wanita</label>
+                        <input type="text" placeholder="Nama lengkap">
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Mempelai Pria</label>
+                        <input type="text" placeholder="Nama lengkap">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nomor WhatsApp</label>
+                        <input type="tel" placeholder="08xxxxxxxxxx">
+                    </div>
+                    <div class="form-group">
+                        <label>Tanggal Pernikahan</label>
+                        <input type="date">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Layanan yang Diminati</label>
+                    <select>
+                        <option value="">-- Pilih Layanan --</option>
+                        <option value="prewedding">Pre-Wedding Session</option>
+                        <option value="wedding">Wedding Day Coverage</option>
+                        <option value="intimate">Paket Intimate</option>
+                        <option value="eternal">Paket Eternal (Populer)</option>
+                        <option value="grand">Paket Grand</option>
+                        <option value="custom">Custom Package</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Ceritakan Rencana Pernikahan Anda</label>
+                    <textarea placeholder="Lokasi venue, tema pernikahan, jumlah tamu, atau pertanyaan lainnya..."></textarea>
+                </div>
+                <button type="submit" class="form-submit">Kirim Pesan</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="logo">
+                    <span class="logo-name">ETERNIA</span>
+                    <span class="logo-tagline">Wedding Photography</span>
+                </div>
+                <p>Mengabadikan kisah cinta dengan keindahan dan ketulusan sejak 2015. Setiap momen berharga, setiap cerita istimewa.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Layanan</h4>
+                <ul>
+                    <li><a href="#">Pre-Wedding</a></li>
+                    <li><a href="#">Wedding Day</a></li>
+                    <li><a href="#">Engagement</a></li>
+                    <li><a href="#">Cinematic Video</a></li>
+                    <li><a href="#">Album & Prints</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Navigasi</h4>
+                <ul>
+                    <li><a href="#tentang">Tentang Kami</a></li>
+                    <li><a href="#paket">Paket Harga</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#kontak">Kontak</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Ikuti Kami</h4>
+                <div class="social-links">
+                    <a href="#" class="social-link">📷</a>
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">🎵</a>
+                    <a href="#" class="social-link">▶️</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Eternia Studio. Hak Cipta Dilindungi. Dibuat dengan ❤️ di Jambi</p>
+            <div class="footer-awards">
+                <span>Best Wedding Photographer 2024</span>
+                <span>IPPJ Member</span>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorRing = document.querySelector('.cursor-ring');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+        let ringX = 0, ringY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.2;
+            cursorY += (mouseY - cursorY) * 0.2;
+            ringX += (mouseX - ringX) * 0.1;
+            ringY += (mouseY - ringY) * 0.1;
+
+            cursor.style.left = cursorX - 6 + 'px';
+            cursor.style.top = cursorY - 6 + 'px';
+            cursorRing.style.left = ringX - 20 + 'px';
+            cursorRing.style.top = ringY - 20 + 'px';
+
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Cursor hover effect
+        document.querySelectorAll('a, button, .portfolio-item, .service-card, .package-card').forEach(el => {
+            el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+        });
+
+        // Navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Reveal on scroll
+        const reveals = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const revealTop = el.getBoundingClientRect().top;
+                const revealPoint = 120;
+
+                if (revealTop < windowHeight - revealPoint) {
+                    el.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+     

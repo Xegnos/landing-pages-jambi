@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOGIYO Korean BBQ | All You Can Eat Jambi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #E63946;
+            --red-dark: #B82E3A;
+            --red-glow: #FF4D5A;
+            --charcoal: #1A1A1A;
+            --charcoal-light: #2D2D2D;
+            --smoke: #3D3D3D;
+            --cream: #FFF8F0;
+            --cream-dark: #F5EDE3;
+            --gold: #F4A261;
+            --gold-light: #FFD166;
+            --soy: #5C4033;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background: var(--charcoal);
+            color: var(--cream);
+            overflow-x: hidden;
+        }
+
+        /* Smoke Animation Background */
+        .smoke-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.03;
+            background: 
+                radial-gradient(ellipse at 20% 20%, var(--smoke) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, var(--smoke) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, var(--smoke) 0%, transparent 70%);
+            animation: smokeMove 20s ease-in-out infinite;
+        }
+
+        @keyframes smokeMove {
+            0%, 100% { transform: scale(1) translate(0, 0); }
+            50% { transform: scale(1.1) translate(-2%, 2%); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(26, 26, 26, 0.98), transparent);
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(26, 26, 26, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-korean {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 2rem;
+            color: var(--red);
+            line-height: 1;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-name {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 1.5rem;
+            color: var(--cream);
+            letter-spacing: 0.05em;
+        }
+
+        .logo-tagline {
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--cream);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--red);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 0.9rem 2rem;
+            background: var(--red);
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-cta:hover {
+            color: var(--charcoal);
+        }
+
+        .nav-cta:hover::before {
+            left: 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 6rem 2rem;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse at 50% 120%, var(--red-dark) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 0%, var(--smoke) 0%, transparent 40%),
+                radial-gradient(ellipse at 80% 0%, var(--smoke) 0%, transparent 40%),
+                var(--charcoal);
+        }
+
+        .hero-grill-lines {
+            position: absolute;
+            inset: 0;
+            opacity: 0.05;
+            background-image: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 40px,
+                var(--cream) 40px,
+                var(--cream) 42px
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero-korean-text {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: clamp(4rem, 15vw, 12rem);
+            color: var(--red);
+            line-height: 0.9;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 60px rgba(230, 57, 70, 0.5);
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { text-shadow: 0 0 60px rgba(230, 57, 70, 0.5); }
+            50% { text-shadow: 0 0 100px rgba(230, 57, 70, 0.8), 0 0 150px rgba(230, 57, 70, 0.4); }
+        }
+
+        .hero-title {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            color: var(--cream);
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--gold);
+            font-weight: 500;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--cream);
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .hero-price {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(244, 162, 97, 0.15);
+            border: 2px solid var(--gold);
+            padding: 1.5rem 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero-price-label {
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .hero-price-amount {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 2.5rem;
+            color: var(--cream);
+        }
+
+        .hero-price-note {
+            font-size: 0.85rem;
+            color: var(--cream);
+            opacity: 0.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 1.2rem 3rem;
+            background: var(--red);
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 2px solid var(--red);
+        }
+
+        .btn-primary:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--charcoal);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(230, 57, 70, 0.3);
+        }
+
+        .btn-secondary {
+            padding: 1.2rem 3rem;
+            background: transparent;
+            border: 2px solid var(--cream);
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--cream);
+            color: var(--charcoal);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator span {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--cream);
+            opacity: 0.5;
+        }
+
+        .scroll-indicator::after {
+            content: '↓';
+            font-size: 1.5rem;
+            color: var(--red);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* Features Bar */
+        .features-bar {
+            background: var(--red);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--cream);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .feature-item span {
+            font-size: 1.5rem;
+        }
+
+        /* Menu Section */
+        .menu {
+            padding: 8rem 4rem;
+            background: var(--charcoal);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-korean {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 3rem;
+            color: var(--red);
+            opacity: 0.3;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--cream);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .menu-tab {
+            padding: 0.8rem 2rem;
+            background: transparent;
+            border: 2px solid var(--smoke);
+            color: var(--cream);
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-tab:hover,
+        .menu-tab.active {
+            background: var(--red);
+            border-color: var(--red);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-card {
+            background: var(--charcoal-light);
+            border: 1px solid var(--smoke);
+            padding: 0;
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--red);
+            box-shadow: 0 20px 50px rgba(230, 57, 70, 0.2);
+        }
+
+        .menu-card-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--smoke) 0%, var(--charcoal) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-card-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 8px,
+                rgba(230, 57, 70, 0.1) 8px,
+                rgba(230, 57, 70, 0.1) 10px
+            );
+        }
+
+        .menu-card-emoji {
+            font-size: 4rem;
+            filter: grayscale(20%);
+        }
+
+        .menu-card-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--red);
+            color: var(--cream);
+            padding: 0.4rem 0.8rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .menu-card-content {
+            padding: 1.5rem;
+        }
+
+        .menu-card-title {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 1.4rem;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-card-korean {
+            font-size: 0.9rem;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+        }
+
+        .menu-card-desc {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--cream);
+            opacity: 0.7;
+        }
+
+        /* Cuts Section */
+        .cuts {
+            padding: 8rem 4rem;
+            background: var(--charcoal-light);
+            position: relative;
+        }
+
+        .cuts-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .cut-card {
+            background: var(--charcoal);
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid var(--smoke);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cut-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--red);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .cut-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .cut-card:hover {
+            border-color: var(--red);
+            transform: translateY(-5px);
+        }
+
+        .cut-emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .cut-name {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 1.2rem;
+            color: var(--cream);
+            margin-bottom: 0.3rem;
+        }
+
+        .cut-korean {
+            font-size: 0.85rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .cut-desc {
+            font-size: 0.8rem;
+            color: var(--cream);
+            opacity: 0.6;
+        }
+
+        /* Oden Section */
+        .oden {
+            padding: 8rem 4rem;
+            background: linear-gradient(180deg, var(--charcoal) 0%, var(--soy) 100%);
+            position: relative;
+        }
+
+        .oden-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .oden-text .section-korean {
+            text-align: left;
+        }
+
+        .oden-text .section-title {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .oden-text p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--cream);
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        .oden-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .oden-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid var(--gold);
+        }
+
+        .oden-item span {
+            font-size: 1.5rem;
+        }
+
+        .oden-item-text {
+            font-size: 0.9rem;
+            color: var(--cream);
+        }
+
+        .oden-visual {
+            position: relative;
+        }
+
+        .oden-image-placeholder {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--smoke) 0%, var(--charcoal) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 3px solid var(--gold);
+        }
+
+        .oden-image-placeholder::before {
+            content: '';
+            position: absolute;
+            inset: 20px;
+            border: 1px dashed var(--gold);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        .oden-image-text {
+            font-size: 5rem;
+        }
+
+        .oden-steam {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            opacity: 0.5;
+            animation: steam 2s ease-in-out infinite;
+        }
+
+        @keyframes steam {
+            0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 0.6; transform: translateX(-50%) translateY(-20px); }
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 8rem 4rem;
+            background: var(--charcoal);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            position: relative;
+        }
+
+        .steps-grid::before {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--red), var(--gold), var(--red));
+            opacity: 0.3;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 120px;
+            height: 120px;
+            background: var(--charcoal-light);
+            border: 3px solid var(--red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 3rem;
+            color: var(--red);
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover .step-number {
+            background: var(--red);
+            color: var(--cream);
+            transform: scale(1.1);
+        }
+
+        .step-title {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 1.3rem;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-desc {
+            font-size: 0.9rem;
+            color: var(--cream);
+            opacity: 0.7;
+            line-height: 1.6;
+        }
+
+        /* Promo Section */
+        .promo {
+            padding: 6rem 4rem;
+            background: var(--red);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo::before {
+            content: '특별';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 20rem;
+            color: var(--red-dark);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .promo-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .promo-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--charcoal);
+            padding: 0.5rem 1.5rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .promo-title {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--cream);
+            margin-bottom: 1rem;
+        }
+
+        .promo-desc {
+            font-size: 1.1rem;
+            color: var(--cream);
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Location Section */
+        .location {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 80vh;
+        }
+
+        .location-info {
+            background: var(--charcoal);
+            padding: 6rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .location-info .section-korean {
+            text-align: left;
+        }
+
+        .location-info .section-title {
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .contact-details {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .contact-text h4 {
+            color: var(--cream);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-text p {
+            color: var(--cream);
+            opacity: 0.7;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: var(--charcoal-light);
+            border: 1px solid var(--smoke);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--red);
+            border-color: var(--red);
+        }
+
+        .location-map {
+            background: linear-gradient(135deg, var(--smoke) 0%, var(--charcoal) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .map-placeholder {
+            text-align: center;
+        }
+
+        .map-placeholder-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .map-placeholder-text {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 1.5rem;
+            color: var(--cream);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            padding: 4rem 4rem 2rem;
+            border-top: 1px solid var(--smoke);
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid var(--smoke);
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-brand p {
+            color: var(--cream);
+            opacity: 0.6;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 280px;
+        }
+
+        .footer-links h4 {
+            color: var(--red);
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--cream);
+            opacity: 0.6;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            color: var(--cream);
+            opacity: 0.4;
+            font-size: 0.85rem;
+        }
+
+        .footer-payments {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-payments span {
+            padding: 0.4rem 0.8rem;
+            background: var(--charcoal-light);
+            color: var(--cream);
+            opacity: 0.6;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .cuts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem;
+            }
+
+            .steps-grid::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu, .cuts, .oden, .how-it-works {
+                padding: 5rem 2rem;
+            }
+
+            .oden-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .oden-visual {
+                order: -1;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .location {
+                grid-template-columns: 1fr;
+            }
+
+            .location-info {
+                padding: 4rem 2rem;
+            }
+
+            .location-map {
+                min-height: 300px;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+
+            footer {
+                padding: 3rem 2rem 2rem;
+            }
+
+            .features-bar {
+                padding: 1.5rem 2rem;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-price {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 1.5rem 2rem;
+            }
+
+            .cuts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .oden-items {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="smoke-bg"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <span class="logo-korean">고기요</span>
+            <div class="logo-text">
+                <span class="logo-name">GOGIYO</span>
+                <span class="logo-tagline">Korean BBQ • Jambi</span>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#potongan">Potongan Daging</a></li>
+            <li><a href="#oden">Oden Bar</a></li>
+            <li><a href="#lokasi">Lokasi</a></li>
+        </ul>
+        <a href="https://wa.me/628123456789" class="nav-cta">Reservasi</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grill-lines"></div>
+        <div class="hero-content">
+            <div class="hero-korean-text">고기요</div>
+            <h1 class="hero-title">KOREAN BBQ ALL YOU CAN EAT</h1>
+            <p class="hero-subtitle">🔥 Makan Sepuasnya • Panggang Sendiri 🔥</p>
+            <p class="hero-desc">Nikmati pengalaman Korean BBQ autentik dengan pilihan daging sapi premium, ayam bumbu khas Korea, dan oden bar hangat. Panggang sendiri di meja, makan sepuasnya!</p>
+            <div class="hero-price">
+                <span class="hero-price-label">Mulai dari</span>
+                <span class="hero-price-amount">Rp 129.000</span>
+                <span class="hero-price-note">/ orang • 90 menit</span>
+            </div>
+            <div class="hero-buttons">
+                <a href="https://wa.me/628123456789" class="btn-primary">Reservasi Sekarang</a>
+                <a href="#menu" class="btn-secondary">Lihat Menu</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+        </div>
+    </section>
+
+    <!-- Features Bar -->
+    <div class="features-bar">
+        <div class="feature-item"><span>🥩</span> Daging Segar Setiap Hari</div>
+        <div class="feature-item"><span>♻️</span> Refill Sepuasnya</div>
+        <div class="feature-item"><span>🍲</span> Oden Bar Gratis</div>
+        <div class="feature-item"><span>🥬</span> Banchan Lengkap</div>
+        <div class="feature-item"><span>❄️</span> AC Dingin & Nyaman</div>
+    </div>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="section-header reveal">
+            <div class="section-korean">메뉴</div>
+            <h2 class="section-title">PILIHAN PAKET AYCE</h2>
+            <p class="section-subtitle">Pilih Paket Sesuai Selera</p>
+        </div>
+        <div class="menu-categories">
+            <button class="menu-tab active">Semua</button>
+            <button class="menu-tab">Paket Reguler</button>
+            <button class="menu-tab">Paket Premium</button>
+            <button class="menu-tab">Paket VIP</button>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-card reveal">
+                <div class="menu-card-image">
+                    <span class="menu-card-emoji">🥩</span>
+                    <span class="menu-card-badge">Best Seller</span>
+                </div>
+                <div class="menu-card-content">
+                    <h3 class="menu-card-title">Paket Reguler</h3>
+                    <p class="menu-card-korean">레귤러 패키지 • Rp 129.000/orang</p>
+                    <p class="menu-card-desc">Beef slice, chicken bulgogi, sosis, bakso, sayuran segar, nasi putih, banchan lengkap, dan akses oden bar.</p>
+                </div>
+            </div>
+            <div class="menu-card reveal">
+                <div class="menu-card-image">
+                    <span class="menu-card-emoji">🔥</span>
+                    <span class="menu-card-badge">Favorit</span>
+                </div>
+                <div class="menu-card-content">
+                    <h3 class="menu-card-title">Paket Premium</h3>
+                    <p class="menu-card-korean">프리미엄 패키지 • Rp 169.000/orang</p>
+                    <p class="menu-card-desc">Semua menu Reguler + beef tongue, samgyeopsal, dak galbi, udang, cumi, dan cheese fondue.</p>
+                </div>
+            </div>
+            <div class="menu-card reveal">
+                <div class="menu-card-image">
+                    <span class="menu-card-emoji">👑</span>
+                    <span class="menu-card-badge">Premium</span>
+                </div>
+                <div class="menu-card-content">
+                    <h3 class="menu-card-title">Paket VIP Wagyu</h3>
+                    <p class="menu-card-korean">VIP 와규 패키지 • Rp 249.000/orang</p>
+                    <p class="menu-card-desc">Semua menu Premium + wagyu slice, beef rib eye, galbi jjim, dan unlimited soft drink.</p>
+                </div>
+            </div>
+            <div class="menu-card reveal">
+                <div class="menu-card-image">
+                    <span class="menu-card-emoji">🐔</span>
+                </div>
+                <div class="menu-card-content">
+                    <h3 class="menu-card-title">Paket Chicken Lover</h3>
+                    <p class="menu-card-korean">치킨 러버 패키지 • Rp 99.000/orang</p>
+                    <p class="menu-card-desc">Khusus pecinta ayam! Dak galbi, chicken bulgogi, chicken katsu, sayuran, nasi, dan banchan.</p>
+                </div>
+            </div>
+            <div class="menu-card reveal">
+                <div class="menu-card-image">
+                    <span class="menu-card-emoji">👨‍👩‍👧‍👦</span>
+                </div>
+                <div class="menu-card-content">
+                    <h3 class="menu-card-title">Paket Family</h3>
+                    <p class="menu-card-korean">패밀리 패키지 • Rp 499.000/4 orang</p>
+                    <p class="menu-card-desc">Paket hemat untuk keluarga! Setara Paket Premium untuk 4 orang + 1 porsi jjigae gratis.</p>
+                </div>
+            </div>
+            <div class="menu-card reveal">
+                <div class="menu-card-image">
+                    <span class="menu-card-emoji">🎉</span>
+                </div>
+                <div class="menu-card-content">
+                    <h3 class="menu-card-title">Paket Birthday</h3>
+                    <p class="menu-card-korean">생일 패키지 • Rp 189.000/orang</p>
+                    <p class="menu-card-desc">Rayakan ulang tahun! Paket Premium + kue ulang tahun mini + foto polaroid + dekorasi meja.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cuts Section -->
+    <section class="cuts" id="potongan">
+        <div class="section-header reveal">
+            <div class="section-korean">고기</div>
+            <h2 class="section-title">PILIHAN POTONGAN DAGING</h2>
+            <p class="section-subtitle">Potongan Premium untuk Sensasi BBQ Terbaik</p>
+        </div>
+        <div class="cuts-grid">
+            <div class="cut-card reveal">
+                <div class="cut-emoji">🥩</div>
+                <h3 class="cut-name">Beef Slice</h3>
+                <p class="cut-korean">소고기 슬라이스</p>
+                <p class="cut-desc">Irisan tipis daging sapi pilihan</p>
+            </div>
+            <div class="cut-card reveal">
+                <div class="cut-emoji">🍖</div>
+                <h3 class="cut-name">Samgyeopsal</h3>
+                <p class="cut-korean">삼겹살</p>
+                <p class="cut-desc">Daging perut babi 3 lapis</p>
+            </div>
+            <div class="cut-card reveal">
+                <div class="cut-emoji">👅</div>
+                <h3 class="cut-name">Beef Tongue</h3>
+                <p class="cut-korean">우설</p>
+                <p class="cut-desc">Lidah sapi lembut premium</p>
+            </div>
+            <div class="cut-card reveal">
+                <div class="cut-emoji">🥓</div>
+                <h3 class="cut-name">Chadolbaegi</h3>
+                <p class="cut-korean">차돌배기</p>
+                <p class="cut-desc">Beef brisket marbling tinggi</p>
+            </div>
+            <div class="cut-card reveal">
+                <div class="cut-emoji">🐔</div>
+                <h3 class="cut-name">Dak Galbi</h3>
+                <p class="cut-korean">닭갈비</p>
+                <p class="cut-desc">Ayam bumbu pedas manis</p>
+            </div>
+            <div class="cut-card reveal">
+                <div class="cut-emoji">🍗</div>
+                <h3 class="cut-name">Chicken Bulgogi</h3>
+                <p class="cut-korean">닭불고기</p>
+                <p class="cut-desc">Ayam marinasi kecap Korea</p>
+            </div>
+            <div class="cut-card reveal">
+                <div class="cut-emoji">🦐</div>
+                <h3 class="cut-name">Saeu</h3>
+                <p class="cut-korean">새우</p>
+                <p class="cut-desc">Udang segar siap panggang</p>
+            </div>
+            <div class="cut-card reveal">
+                <div class="cut-emoji">🦑</div>
+                <h3 class="cut-name">Ojingeo</h3>
+                <p class="cut-korean">오징어</p>
+                <p class="cut-desc">Cumi bumbu gochujang</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Oden Section -->
+    <section class="oden" id="oden">
+        <div class="oden-content">
+            <div class="oden-text reveal">
+                <div class="section-korean">오뎅</div>
+                <h2 class="section-title">ODEN BAR SEPUASNYA</h2>
+                <p>Lengkapi pengalaman Korean BBQ Anda dengan oden bar hangat yang bisa diambil sepuasnya. Kuah kaldu gurih dengan berbagai pilihan oden autentik Korea - sempurna untuk menghangatkan perut di sela-sela memanggang!</p>
+                <div class="oden-items">
+                    <div class="oden-item">
+                        <span>🍢</span>
+                        <span class="oden-item-text">Eomuk (Fish Cake)</span>
+                    </div>
+                    <div class="oden-item">
+                        <span>🥚</span>
+                        <span class="oden-item-text">Gyeran (Telur Rebus)</span>
+                    </div>
+                    <div class="oden-item">
+                        <span>🍜</span>
+                        <span class="oden-item-text">Tteok (Kue Beras)</span>
+                    </div>
+                    <div class="oden-item">
+                        <span>🥬</span>
+                        <span class="oden-item-text">Kongnamul (Tauge)</span>
+                    </div>
+                    <div class="oden-item">
+                        <span>🍲</span>
+                        <span class="oden-item-text">Mu (Lobak)</span>
+                    </div>
+                    <div class="oden-item">
+                        <span>🧄</span>
+                        <span class="oden-item-text">Cheongyang Gochu</span>
+                    </div>
+                </div>
+            </div>
+            <div class="oden-visual reveal">
+                <div class="oden-image-placeholder">
+                    <span class="oden-image-text">🍢</span>
+                </div>
+                <div class="oden-steam">♨️</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="section-header reveal">
+            <div class="section-korean">방법</div>
+            <h2 class="section-title">CARA MENIKMATI GOGIYO</h2>
+            <p class="section-subtitle">Mudah, Seru, dan Puas!</p>
+        </div>
+        <div class="steps-grid">
+            <div class="step reveal">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Pilih Paket</h3>
+                <p class="step-desc">Pilih paket AYCE sesuai selera dan budget Anda. Semua sudah termasuk banchan dan oden bar!</p>
+            </div>
+            <div class="step reveal">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Ambil Daging</h3>
+                <p class="step-desc">Ambil daging, seafood, dan sayuran dari buffet. Mau refill? Tinggal ambil lagi, sepuasnya!</p>
+            </div>
+            <div class="step reveal">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Panggang Sendiri</h3>
+                <p class="step-desc">Panggang di grill meja Anda. Staff kami siap membantu jika butuh tips memanggang!</p>
+            </div>
+            <div class="step reveal">
+                <div class="step-number">4</div>
+                <h3 class="step-title">Nikmati!</h3>
+                <p class="step-desc">Bungkus dengan selada, tambah ssamjang, dan nikmati! Jangan lupa coba oden bar-nya!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promo Section -->
+    <section class="promo">
+        <div class="promo-content reveal">
+            <span class="promo-badge">🔥 Promo Spesial</span>
+            <h2 class="promo-title">WEEKDAY LUNCH DEAL!</h2>
+            <p class="promo-desc">Senin - Jumat, jam 11.00 - 15.00 WIB. Dapatkan diskon 20% untuk semua paket AYCE! Ajak teman-teman makan siang bareng!</p>
+            <a href="https://wa.me/628123456789" class="btn-primary">Reservasi via WhatsApp</a>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location" id="lokasi">
+        <div class="location-info">
+            <div class="section-korean">위치</div>
+            <h2 class="section-title">KUNJUNGI KAMI</h2>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-text">
+                        <h4>Alamat</h4>
+                        <p>Jl. Sultan Thaha No. 123<br>WTC Batanghari Lt. 3<br>Kota Jambi 36123</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🕐</div>
+                    <div class="contact-text">
+                        <h4>Jam Buka</h4>
+                        <p>Senin - Kamis: 11.00 - 22.00 WIB<br>Jumat - Minggu: 11.00 - 23.00 WIB</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-text">
+                        <h4>Reservasi</h4>
+                        <p>+62 812 3456 789 (WhatsApp)<br>+62 741 123 456 (Telepon)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#" class="social-link">📷</a>
+                <a href="#" class="social-link">📘</a>
+                <a href="#" class="social-link">🎵</a>
+                <a href="#" class="social-link">💬</a>
+            </div>
+        </div>
+        <div class="location-map">
+            <div class="map-placeholder">
+                <div class="map-placeholder-icon">📍</div>
+                <p class="map-placeholder-text">Peta Interaktif<br>Segera Hadir</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="logo">
+                    <span class="logo-korean">고기요</span>
+                    <div class="logo-text">
+                        <span class="logo-name">GOGIYO</span>
+                        <span class="logo-tagline">Korean BBQ • Jambi</span>
+                    </div>
+                </div>
+                <p>Restoran Korean BBQ All You Can Eat pertama di Jambi dengan konsep panggang sendiri dan oden bar sepuasnya.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Menu</h4>
+                <ul>
+                    <li><a href="#">Paket AYCE</a></li>
+                    <li><a href="#">Potongan Daging</a></li>
+                    <li><a href="#">Oden Bar</a></li>
+                    <li><a href="#">Minuman</a></li>
+                    <li><a href="#">Dessert</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Info</h4>
+                <ul>
+                    <li><a href="#">Tentang Kami</a></li>
+                    <li><a href="#">Cara Reservasi</a></li>
+                    <li><a href="#">Promo Terbaru</a></li>
+                    <li><a href="#">Karir</a></li>
+                    <li><a href="#">Franchise</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Bantuan</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Syarat & Ketentuan</a></li>
+                    <li><a href="#">Kebijakan Privasi</a></li>
+                    <li><a href="#">Hubungi Kami</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 GOGIYO Korean BBQ Jambi. Hak Cipta Dilindungi.</p>
+            <div class="footer-payments">
+                <span>QRIS</span>
+                <span>DANA</span>
+                <span>OVO</span>
+                <span>GoPay</span>
+                <span>Kartu Kredit</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Reveal on scroll
+        const reveals = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const revealTop = el.getBoundingClientRect().top;
+                const revealPoint = 120;
+
+                if (revealTop < windowHeight - revealPoint) {
+                    el.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Menu tabs (visual only for demo)
+        document.querySelectorAll('.menu-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
