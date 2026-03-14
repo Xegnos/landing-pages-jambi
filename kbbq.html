@@ -568,12 +568,25 @@
 
         .cut-card {
             background: var(--charcoal);
-            padding: 2rem;
+            padding: 0;
             text-align: center;
             border: 1px solid var(--smoke);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+        }
+
+        .cut-card h3,
+        .cut-card p {
+            padding: 0 1.5rem;
+        }
+
+        .cut-card h3 {
+            padding-top: 1rem;
+        }
+
+        .cut-card p:last-child {
+            padding-bottom: 1.5rem;
         }
 
         .cut-card::before {
@@ -599,6 +612,14 @@
 
         .cut-emoji {
             font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .cut-img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            display: block;
             margin-bottom: 1rem;
         }
 
@@ -1288,49 +1309,49 @@
         </div>
         <div class="cuts-grid">
             <div class="cut-card reveal">
-                <div class="cut-emoji">🥩</div>
+                <img src="kbbq/beef-slice.jpg" alt="Beef Slice" class="cut-img">
                 <h3 class="cut-name">Beef Slice</h3>
                 <p class="cut-korean">소고기 슬라이스</p>
                 <p class="cut-desc">Irisan tipis daging sapi pilihan</p>
             </div>
             <div class="cut-card reveal">
-                <div class="cut-emoji">🍖</div>
+                <img src="kbbq/samgyeopsal.jpg" alt="Samgyeopsal" class="cut-img">
                 <h3 class="cut-name">Samgyeopsal</h3>
                 <p class="cut-korean">삼겹살</p>
                 <p class="cut-desc">Daging perut babi 3 lapis</p>
             </div>
             <div class="cut-card reveal">
-                <div class="cut-emoji">👅</div>
+                <img src="kbbq/beef-tongue.jpg" alt="Beef Tongue" class="cut-img">
                 <h3 class="cut-name">Beef Tongue</h3>
                 <p class="cut-korean">우설</p>
                 <p class="cut-desc">Lidah sapi lembut premium</p>
             </div>
             <div class="cut-card reveal">
-                <div class="cut-emoji">🥓</div>
+                <img src="kbbq/chadolbaegi.jpg" alt="Chadolbaegi" class="cut-img">
                 <h3 class="cut-name">Chadolbaegi</h3>
                 <p class="cut-korean">차돌배기</p>
                 <p class="cut-desc">Beef brisket marbling tinggi</p>
             </div>
             <div class="cut-card reveal">
-                <div class="cut-emoji">🐔</div>
+                <img src="kbbq/dak-galbi.jpg" alt="Dak Galbi" class="cut-img">
                 <h3 class="cut-name">Dak Galbi</h3>
                 <p class="cut-korean">닭갈비</p>
                 <p class="cut-desc">Ayam bumbu pedas manis</p>
             </div>
             <div class="cut-card reveal">
-                <div class="cut-emoji">🍗</div>
+                <img src="kbbq/chicken-bulgogi.jpg" alt="Chicken Bulgogi" class="cut-img">
                 <h3 class="cut-name">Chicken Bulgogi</h3>
                 <p class="cut-korean">닭불고기</p>
                 <p class="cut-desc">Ayam marinasi kecap Korea</p>
             </div>
             <div class="cut-card reveal">
-                <div class="cut-emoji">🦐</div>
+                <img src="kbbq/saeu.jpg" alt="Saeu" class="cut-img">
                 <h3 class="cut-name">Saeu</h3>
                 <p class="cut-korean">새우</p>
                 <p class="cut-desc">Udang segar siap panggang</p>
             </div>
             <div class="cut-card reveal">
-                <div class="cut-emoji">🦑</div>
+                <img src="kbbq/ojingeo.jpg" alt="Ojingeo" class="cut-img">
                 <h3 class="cut-name">Ojingeo</h3>
                 <p class="cut-korean">오징어</p>
                 <p class="cut-desc">Cumi bumbu gochujang</p>
