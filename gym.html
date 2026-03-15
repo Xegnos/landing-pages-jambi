@@ -2210,20 +2210,25 @@
 
         // Reveal on scroll
         const reveals = document.querySelectorAll('.reveal');
-        const revealOnScroll = () => {
+        const revealOnScroll = (threshold = 120) => {
             reveals.forEach(el => {
                 const windowHeight = window.innerHeight;
                 const revealTop = el.getBoundingClientRect().top;
-                const revealPoint = 120;
 
-                if (revealTop < windowHeight - revealPoint) {
+                if (revealTop < windowHeight - threshold) {
                     el.classList.add('active');
                 }
             });
         };
 
-        window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll();
+        // On first load, reveal everything already rendered (threshold = full page)
+        document.addEventListener('DOMContentLoaded', () => {
+            revealOnScroll(-99999);
+            setTimeout(() => revealOnScroll(-99999), 500);
+        });
+
+        window.addEventListener('scroll', () => revealOnScroll(120));
+        revealOnScroll(-99999);
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
