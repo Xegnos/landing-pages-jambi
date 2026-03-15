@@ -1848,7 +1848,7 @@
         <div class="coaches-grid">
             <div class="coach-card reveal">
                 <div class="coach-image">
-                    <img src="gym/coach-reza.jpg" alt="Coach Reza Pratama">
+                    <img src="gym/coach-reza.jpg" alt="REZA PRATAMA">
                     <span class="coach-specialty">Strength & Conditioning</span>
                 </div>
                 <div class="coach-info">
@@ -1868,7 +1868,7 @@
             </div>
             <div class="coach-card reveal">
                 <div class="coach-image">
-                    <img src="gym/coach-diana.jpg" alt="Coach Diana Putri">
+                    <img src="gym/coach-diana.jpg" alt="DIANA PUTRI">
                     <span class="coach-specialty">Weight Loss Specialist</span>
                 </div>
                 <div class="coach-info">
@@ -1888,7 +1888,7 @@
             </div>
             <div class="coach-card reveal">
                 <div class="coach-image">
-                    <img src="gym/coach-andi.jpg" alt="Coach Andi Wijaya">
+                    <img src="gym/coach-andi.jpg" alt="ANDI WIJAYA">
                     <span class="coach-specialty">Functional Training</span>
                 </div>
                 <div class="coach-info">
@@ -1908,7 +1908,7 @@
             </div>
             <div class="coach-card reveal">
                 <div class="coach-image">
-                    <img src="gym/coach-maya.jpg" alt="Coach Maya Sari">
+                    <img src="gym/coach-maya.jpg" alt="MAYA SARI">
                     <span class="coach-specialty">Yoga & Pilates</span>
                 </div>
                 <div class="coach-info">
@@ -2210,25 +2210,27 @@
 
         // Reveal on scroll
         const reveals = document.querySelectorAll('.reveal');
-        const revealOnScroll = (threshold = 120) => {
+        const revealOnScroll = () => {
             reveals.forEach(el => {
                 const windowHeight = window.innerHeight;
                 const revealTop = el.getBoundingClientRect().top;
+                const revealPoint = 120;
 
-                if (revealTop < windowHeight - threshold) {
+                if (revealTop < windowHeight - revealPoint) {
                     el.classList.add('active');
                 }
             });
         };
 
-        // On first load, reveal everything already rendered (threshold = full page)
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+        // Force reveal all elements on load in case page has no scroll height
         document.addEventListener('DOMContentLoaded', () => {
-            revealOnScroll(-99999);
-            setTimeout(() => revealOnScroll(-99999), 500);
+            document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
         });
-
-        window.addEventListener('scroll', () => revealOnScroll(120));
-        revealOnScroll(-99999);
+        setTimeout(() => {
+            document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+        }, 100);
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -2245,4 +2247,9 @@
         document.querySelectorAll('.toggle-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-                th
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
