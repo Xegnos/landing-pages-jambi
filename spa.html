@@ -261,6 +261,7 @@
             position: relative;
             background: var(--forest);
             overflow: hidden;
+            min-height: 600px;
         }
 
         .hero-image-placeholder {
@@ -392,6 +393,26 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
+        }
+
+
+        .service-card-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            margin: -3rem -3rem 2rem -3rem;
+            width: calc(100% + 6rem);
+        }
+
+        .service-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .service-card-image img {
+            transform: scale(1.05);
         }
 
         .service-card {
@@ -999,36 +1020,42 @@
         </div>
         <div class="services-grid">
             <div class="service-card reveal">
+                <div class="service-card-image"><img src="spa/batu-vulkanik.jpg" alt="Terapi Batu Vulkanik"></div>
                 <div class="service-icon">B</div>
                 <h3 class="service-title">Terapi Batu Vulkanik Sumatera</h3>
                 <p class="service-desc">Batu vulkanik panas dari Gunung Kerinci dikombinasikan dengan teknik pijat tradisional untuk melepaskan ketegangan dan mengembalikan keseimbangan tubuh.</p>
                 <div class="service-price">Rp 850.000 <span>/ 90 menit</span></div>
             </div>
             <div class="service-card reveal">
+                <div class="service-card-image"><img src="spa/aromaterapi.jpg" alt="Perjalanan Aromaterapi"></div>
                 <div class="service-icon">A</div>
                 <h3 class="service-title">Perjalanan Aromaterapi</h3>
                 <p class="service-desc">Pengalaman sensori menggunakan minyak esensial lokal termasuk melati dan nilam khas Jambi untuk relaksasi mendalam.</p>
                 <div class="service-price">Rp 650.000 <span>/ 75 menit</span></div>
             </div>
             <div class="service-card reveal">
+                <div class="service-card-image"><img src="spa/lulur.jpg" alt="Lulur Tradisional Keraton"></div>
                 <div class="service-icon">L</div>
                 <h3 class="service-title">Lulur Tradisional Keraton</h3>
                 <p class="service-desc">Ritual kecantikan kuno dari keraton Jawa dengan lulur kunyit, mandi bunga, dan pijat minyak kelapa yang menyehatkan.</p>
                 <div class="service-price">Rp 1.200.000 <span>/ 120 menit</span></div>
             </div>
             <div class="service-card reveal">
+                <div class="service-card-image"><img src="spa/facial.jpg" alt="Facial Hutan Hujan"></div>
                 <div class="service-icon">W</div>
                 <h3 class="service-title">Facial Hutan Hujan</h3>
                 <p class="service-desc">Bahan-bahan organik dari hutan hujan Sumatera membersihkan, melembabkan, dan meremajakan kulit dengan kebaikan alam terbaik.</p>
                 <div class="service-price">Rp 550.000 <span>/ 60 menit</span></div>
             </div>
             <div class="service-card reveal">
+                <div class="service-card-image"><img src="spa/romantis.jpg" alt="Paket Romantis Berdua"></div>
                 <div class="service-icon">P</div>
                 <h3 class="service-title">Paket Romantis Berdua</h3>
                 <p class="service-desc">Nikmati pengalaman membahagiakan di suite privat kami dengan pijat sinkron, champagne, dan buah-buahan celup cokelat.</p>
                 <div class="service-price">Rp 2.500.000 <span>/ 150 menit</span></div>
             </div>
             <div class="service-card reveal">
+                <div class="service-card-image"><img src="spa/yoga.jpg" alt="Yoga & Meditasi"></div>
                 <div class="service-icon">Y</div>
                 <h3 class="service-title">Yoga & Meditasi</h3>
                 <p class="service-desc">Awali perjalanan wellness Anda dengan sesi terbimbing di paviliun taman kami yang tenang dengan pemandangan hijau tropis.</p>
