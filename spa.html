@@ -268,7 +268,6 @@
         .hero-image-placeholder {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, var(--forest) 0%, var(--forest-deep) 50%, var(--sage) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -281,6 +280,7 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
+            z-index: 0;
         }
 
         .hero-pattern {
@@ -292,6 +292,7 @@
                 radial-gradient(circle at 80% 70%, var(--gold) 1px, transparent 1px);
             background-size: 60px 60px;
             animation: patternFloat 20s ease-in-out infinite;
+            z-index: 1;
         }
 
         @keyframes patternFloat {
